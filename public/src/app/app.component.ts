@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http'
 })
 export class AppComponent {
   constructor(private _httpService: HttpService,private _http: HttpClient){}
-  title = 'MEAN';
+  title = 'To Your Workout Schedule';
   ngOninit(){
     console.log('hiiii')
     // this._httpService.getApi().subscribe(data=>{
