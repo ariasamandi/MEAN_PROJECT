@@ -5,10 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './http.service';
+import { SettingsComponent } from './settings/settings.component';
+import { AddScheuleComponent } from './add-scheule/add-scheule.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SettingsComponent,
+    AddScheuleComponent,
   ],
   imports: [
     BrowserModule,

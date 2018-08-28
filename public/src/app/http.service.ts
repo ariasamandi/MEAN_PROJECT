@@ -5,17 +5,14 @@ import {HttpClient} from '@angular/common/http'
 })
 export class HttpService {
 
-  constructor(private _http: HttpClient) {
-    // this.getApi()
-    this.getPokemon();
+  constructor(private _http: HttpClient) { }
+   addSchedule(newSchedule: any){
+     return this._http.post('/api/create/schedule', newSchedule);
    }
-  //  getApi(){
-  //    return this._http.get("http://pokeapi.co/api/v2/pokemon/1");
-  //  }
-  getPokemon() {
-    console.log("weird");
-    
-    return this._http.get('http://platform.fatsecret.com/js/?key=14679b4a576345ca8e99efcf53ffaa91');
-    // subscribe to the Observable and provide the code we would like to do with our data from the response
-  }
+   allSchedule(){
+     return this._http.get('/api/schedule')
+   }
+   singleSchedule(schedule: any){
+     return this._http.get(`/api/show/${schedule.id}`)
+   }
 }

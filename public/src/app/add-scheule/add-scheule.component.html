@@ -1,0 +1,6 @@
+<form (submit)="addSchedule()">
+    <h3>Breakfast time</h3><input type="time" name="newSchedule.Breakfast" [(ngModel)]="newSchedule.Breakfast">
+    <h3>Lunch Time</h3><input type="time" name="newSchedule.Lunch" [(ngModel)]="newSchedule.Lunch">
+    <h3>Dinner Time</h3><input type="time" name="newSchedule.Dinner" [(ngModel)]="newSchedule.Dinner">
+    <input type="submit" value="Submit">
+  </form>
