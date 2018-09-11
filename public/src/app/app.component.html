@@ -1,55 +1,59 @@
-<script src="http://platform.fatsecret.com/js/?key=14679b4a576345ca8e99efcf53ffaa91&auto_load=true"></script>
+<!-- <script src="http://platform.fatsecret.com/js/?key=14679b4a576345ca8e99efcf53ffaa91&auto_load=true"></script> -->
 <!--The content below is only a placeholder and can be replaced.-->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <style>
-    body, html {
-    height: 100%;
-}
-    h1{
-      text-align: center;
+  
+  <title>Hello, world!</title>
+</head>
+<body>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('dropdown-toggle').dropdown()
+    });
+    </script>
+    <style>
+        body, html {
+        height: 100%;
     }
-  </style>
-  <div class="p-3 mb-2 bg-secondary text-white">
-  <h1 >
-    Welcome to {{ title }}!
-  </h1>
-  <div *ngIf="schedule">
+        h1{
+          text-align: center;
+        }
+      </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand">Navbar</a>
+      Welcome {{title}}
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/settings">Edit Schedule</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-    <h2>Schedule</h2>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Time</th>
-            <th scope="col">Meal/Activity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>{{schedule.Breakfast}}</td>
-            <td>Breakfast</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>{{schedule.Lunch}}</td>
-            <td>Lunch</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>{{schedule.Dinner}}</td>
-            <td>Dinner</td>
-          </tr>
-        </tbody>
-      </table>
-  <button type="button" class="btn btn-info">Calculate Calories</button>&nbsp;
-  <button type="button" class="btn btn-info">Today's Food</button>&nbsp;
-  <button type="button" class="btn btn-info" [routerLink]="['/settings']">Edit Scheudle</button>
-  </div>
-  <div *ngIf="hasSchedule == false">
-    <button [routerLink] = "['/addSchedule']">Add Schedule</button>
-  </div>
-  <script src="http://platform.fatsecret.com/js?key=14679b4a576345ca8e99efcf53ffaa91&auto_load=true"></script>
-</div>
+</body>
 <router-outlet></router-outlet>
+</html>

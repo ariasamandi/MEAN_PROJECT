@@ -93,5 +93,15 @@ module.exports = {
                 res.json(schedule);
             }
         })
+    },
+    deleteSchedule: (req, res)=>{
+        Schedule.findOneAndRemove({_id: req.params.id}, (err, data)=>{
+            if(err){
+                res.json(err);
+            }
+            else{
+                res.json(data);
+            }
+        })
     }
 }

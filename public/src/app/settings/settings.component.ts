@@ -12,6 +12,11 @@ export class SettingsComponent implements OnInit {
   constructor(private _httpService: HttpService,  private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    this._route.params.subscribe((params: Params)=> {this._httpService.singleSchedule(params).subscribe(data=>{
+      console.log(data);
+      this.schedule = data;
+    })
+  })
   }
 
 }

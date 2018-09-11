@@ -7,6 +7,7 @@ module.exports = (app)=>{
     app.post('/api/create/schedule', Controller.addSchedule);
     app.get('/api/schedule', Controller.allSchedule);
     app.get('/api/show/:id', Controller.singleSchedule);
-    // app.all('*', (req, res)=> res.sendFile(path.resolve('./public/dist/public/index.html')));
+    app.delete('/api/delete/:id', Controller.deleteSchedule);
+    app.all('*', (req, res)=> res.sendFile(path.resolve('./public/dist/public/index.html')));
     
 }

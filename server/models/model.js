@@ -12,10 +12,13 @@ const ActivitySchema = mongoose.Schema({
     name: {type: String, required: [true, "enter activity/mealtime"]}
 });
 const ScheduleSchema = mongoose.Schema({
-    Breakfast: {type: String, required: [true, "pick a time for breakfast"]},
-    Lunch: {type: String, required: [true, "pick a time for Lunch"]},
-    Dinner: {type: String, required: [true, "pick a time for Dinner"]},
-    activities: [ActivitySchema]
+    Breakfast_time: {type: String, required: [true, "pick a time for breakfast"]},
+    Lunch_time: {type: String, required: [true, "pick a time for Lunch"]},
+    Dinner_time: {type: String, required: [true, "pick a time for Dinner"]},
+    activities: [ActivitySchema],
+    Breakfast: [FoodSchema],
+    Lunch: [FoodSchema],
+    Dinner: [FoodSchema]
 
 });
 mongoose.model('Food', FoodSchema);

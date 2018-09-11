@@ -1,3 +1,4 @@
+<div class="p-3 mb-2 bg-secondary text-white">
 <h1>Edit Schedule</h1>
 <form (submit)="editSchedule(this.schedule)">
         <h3>Breakfast time</h3><input type="time" name="schedule.Breakfast" [(ngModel)]="schedule.Breakfast">
@@ -5,3 +6,4 @@
         <h3>Dinner Time</h3><input type="time" name="schedule.Dinner" [(ngModel)]="schedule.Dinner">
         <input type="submit" value="Edit Schedule">
       </form>
+      </div>

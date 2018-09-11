@@ -1,0 +1,47 @@
+<style>
+  #wrapper{
+    background-color: #6c757d;
+    height:592px;
+  }
+</style>
+<div id=wrapper>
+<div class="p-3 mb-2 bg-secondary text-white">
+  <div *ngIf="schedule">
+
+    <h2>Schedule</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Time</th>
+            <th scope="col">Meal/Activity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>{{schedule.Breakfast_time}}</td>
+            <td><a [routerLink]="['/meal']">Breakfast</a></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>{{schedule.Lunch_time}}</td>
+            <td><a [routerLink]="['/meal']">Lunch</a></td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>{{schedule.Dinner_time}}</td>
+            <td><a [routerLink]="['/meal']">Dinner</a></td>
+          </tr>
+        </tbody>
+      </table>
+  <button type="button" class="btn btn-info">Calculate Calories</button>&nbsp;
+  <button type="button" class="btn btn-info">Today's Food</button>&nbsp;
+  <button type="button" class="btn btn-info" [routerLink]="['/settings']">Edit Schedule</button>
+  </div>
+  <div *ngIf="hasSchedule == false">
+    <button [routerLink] = "['/addSchedule']">Add Schedule</button>
+  </div>
+  <script src="http://platform.fatsecret.com/js?key=14679b4a576345ca8e99efcf53ffaa91&auto_load=true"></script>
+</div>
+</div>

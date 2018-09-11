@@ -7,12 +7,16 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpService} from './http.service';
 import { SettingsComponent } from './settings/settings.component';
 import { AddScheuleComponent } from './add-scheule/add-scheule.component';
+import { MainComponent } from './main/main.component';
+import { MealComponent } from './meal/meal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SettingsComponent,
     AddScheuleComponent,
+    MainComponent,
+    MealComponent,
   ],
   imports: [
     BrowserModule,
