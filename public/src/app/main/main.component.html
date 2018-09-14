@@ -21,17 +21,17 @@
           <tr>
             <th scope="row">1</th>
             <td>{{schedule.Breakfast_time}}</td>
-            <td><a [routerLink]="['/meal']">Breakfast</a></td>
+            <td><a [routerLink]="['/meal', schedule._id]">Breakfast</a></td>
           </tr>
           <tr>
             <th scope="row">2</th>
             <td>{{schedule.Lunch_time}}</td>
-            <td><a [routerLink]="['/meal']">Lunch</a></td>
+            <td><a [routerLink]="['/lunch', schedule._id]">Lunch</a></td>
           </tr>
           <tr>
             <th scope="row">3</th>
             <td>{{schedule.Dinner_time}}</td>
-            <td><a [routerLink]="['/meal']">Dinner</a></td>
+            <td><a [routerLink]="['/dinner', schedule._id]">Dinner</a></td>
           </tr>
         </tbody>
       </table>

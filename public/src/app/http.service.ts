@@ -12,7 +12,13 @@ export class HttpService {
    allSchedule(){
      return this._http.get('/api/schedule')
    }
-   singleSchedule(schedule: any){
-     return this._http.get(`/api/show/${schedule.id}`)
+   singleSchedule(id: any){
+     return this._http.get(`/api/show/${id}`)
+   }
+   createFood(newFood: any){
+     return this._http.post('api/create/food', newFood)
+   }
+   allBreakfast(){
+     return this._http.get(`api/breakfast`)
    }
 }

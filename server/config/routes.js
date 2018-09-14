@@ -1,8 +1,10 @@
 const Controller = require('./../controllers/controllers');
 const path = require('path');
 module.exports = (app)=>{
-    app.get('/api/food', Controller.getFood);
-    app.post('/api/create/food', Controller.addFood);
+    app.get('/api/breakfast', Controller.getBreakfast);
+    app.post('/api/create/breakfast/:s_id', Controller.addBreakfast);
+    app.post('/api/create/lunch/:s_id', Controller.addLunch);
+    app.post('/api/create/dinner/:s_id', Controller.addDinner);
     app.post('/api/create/activity', Controller.addActivity);
     app.post('/api/create/schedule', Controller.addSchedule);
     app.get('/api/schedule', Controller.allSchedule);
