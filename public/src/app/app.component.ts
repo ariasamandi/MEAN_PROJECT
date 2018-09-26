@@ -12,12 +12,9 @@ export class AppComponent {
   hasSchedule = true;
   schedule: any;
   ngOnInit(){
-  console.log('hi');
    this._httpService.allSchedule().subscribe(data=>{
-    console.log("the consoel log is", data[0]);
     
     this.schedule = data[0];
-    console.log("this.schedule", this.schedule);
     if(data){
       this.hasSchedule = true;
     }

@@ -7,16 +7,33 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  schedule: any;
   erros = [];
+  editing: any;
+  schedule: any;
   constructor(private _httpService: HttpService,  private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._route.params.subscribe((params: Params)=> {this._httpService.singleSchedule(params).subscribe(data=>{
+    this._route.params.subscribe((params: Params)=> {
+      let p = params['id'];
+      console.log(p)
+      this._httpService.singleSchedule(p).subscribe(data=>{
       console.log(data);
-      this.schedule = data;
+      this.editing = data;
     })
   })
+}
+  editSchedule(editing){
+    console.log(this.editing);
+    this._httpService.editSchedule(this.editing).subscribe(data=>{
+      console.log(data);
+    })
+  }
+  getSchedule(schedule){
+    this._httpService.singleSchedule(schedule._id).subscribe(single=>{
+      console.log("this is da single", single);
+      this.schedule = single;
+      console.log("todays my birthdsy", this.schedule)
+    })
   }
 
 }

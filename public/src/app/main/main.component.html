@@ -36,8 +36,8 @@
         </tbody>
       </table>
   <button type="button" class="btn btn-info">Calculate Calories</button>&nbsp;
-  <button type="button" class="btn btn-info">Today's Food</button>&nbsp;
-  <button type="button" class="btn btn-info" [routerLink]="['/settings']">Edit Schedule</button>
+  <button type="button" class="btn btn-info" [routerLink]="['/today', schedule._id]">Today's Food</button>&nbsp;
+  <button type="button" class="btn btn-info" [routerLink]="['/settings', schedule._id]">Edit Schedule</button>
   </div>
   <div *ngIf="hasSchedule == false">
     <button [routerLink] = "['/addSchedule']">Add Schedule</button>

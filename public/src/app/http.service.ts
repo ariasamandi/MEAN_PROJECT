@@ -13,12 +13,15 @@ export class HttpService {
      return this._http.get('/api/schedule')
    }
    singleSchedule(id: any){
-     return this._http.get(`/api/show/${id}`)
+     return this._http.get(`/api/show/${id}`);
    }
    createFood(newFood: any){
      return this._http.post('api/create/food', newFood)
    }
    allBreakfast(){
      return this._http.get(`api/breakfast`)
+   }
+   editSchedule(edited: any){
+     return this._http.put(`api/schedule/edit/${edited._id}`, edited)
    }
 }

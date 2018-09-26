@@ -158,5 +158,16 @@ module.exports = {
                 res.json(data);
             }
         })
-    }
+    },
+    editSchedule: (req, res)=>{
+        console.log("we in motion")
+        Schedule.update({_id: req.params.id},{$push: req.body}, (err, data)=>{
+            if(err){
+                res.json(err);
+            }
+            else{
+                res.json(data);
+            }
+        })
+    } 
 }
