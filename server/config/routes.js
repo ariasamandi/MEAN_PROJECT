@@ -10,7 +10,7 @@ module.exports = (app)=>{
     app.get('/api/schedule', Controller.allSchedule);
     app.get('/api/show/:id', Controller.singleSchedule);
     app.delete('/api/delete/:id', Controller.deleteSchedule);
-    app.put('api/schedule/edit/:id', Controller.editSchedule);
+    app.put('/api/schedule/edit/:id', Controller.editSchedule);
     app.all('*', (req, res)=> res.sendFile(path.resolve('./public/dist/public/index.html')));
     
 }

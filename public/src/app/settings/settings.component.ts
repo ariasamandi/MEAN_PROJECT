@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from './../http.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -23,9 +24,10 @@ export class SettingsComponent implements OnInit {
   })
 }
   editSchedule(editing){
-    console.log(this.editing);
-    this._httpService.editSchedule(this.editing).subscribe(data=>{
+    console.log(editing, "edited");
+    this._httpService.es(editing).subscribe(data=>{
       console.log(data);
+      this._router.navigate(['/'])
     })
   }
   getSchedule(schedule){

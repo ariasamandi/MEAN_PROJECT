@@ -7,6 +7,7 @@ import { MealComponent } from './meal/meal.component';
 import { LunchComponent } from './lunch/lunch.component';
 import { DinnerComponent } from './dinner/dinner.component';
 import { TodayComponent } from './today/today.component';
+import { CalculateComponent } from './calculate/calculate.component';
 const routes: Routes = [
   {path: 'meal/:id', component: MealComponent},
   {path: '', component: MainComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'lunch/:id', component: LunchComponent},
   {path: 'dinner/:id', component: DinnerComponent},
   {path: 'today/:id', component: TodayComponent},
+  {path: 'calc', component: CalculateComponent},
   {path: "", pathMatch: 'full', redirectTo: '/'}
 ];
 

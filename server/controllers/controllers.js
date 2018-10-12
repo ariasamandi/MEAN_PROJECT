@@ -121,6 +121,7 @@ module.exports = {
     },
     addSchedule: (req, res)=>{
         Schedule.create(req.body, (err, schedule)=>{
+            console.log("hi", schedule)
             if(err){
                 res.json(err);
             }
@@ -161,7 +162,7 @@ module.exports = {
     },
     editSchedule: (req, res)=>{
         console.log("we in motion")
-        Schedule.update({_id: req.params.id},{$push: req.body}, (err, data)=>{
+        Schedule.update({_id: req.params.id}, req.body, (err, data)=>{
             if(err){
                 res.json(err);
             }

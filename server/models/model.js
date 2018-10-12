@@ -22,13 +22,13 @@ const DinnerSchema = mongoose.Schema({
     carbs: {type: Number, required: [true, "enter amount of carbs"]},
 });
 const ActivitySchema = mongoose.Schema({
-    time: {type: Date, required: [true, "enter time"]},
+    time: {type: String, required: [true, "enter time"]},
     name: {type: String, required: [true, "enter activity/mealtime"]}
 });
 const ScheduleSchema = mongoose.Schema({
-    Breakfast_time: {type: Date, required: [true, "pick a time for breakfast"]},
-    Lunch_time: {type: Date, required: [true, "pick a time for Lunch"]},
-    Dinner_time: {type: Date, required: [true, "pick a time for Dinner"]},
+    Breakfast_time: {type: String, required: [true, "pick a time for breakfast"]},
+    Lunch_time: {type: String, required: [true, "pick a time for Lunch"]},
+    Dinner_time: {type: String, required: [true, "pick a time for Dinner"]},
     activities: [ActivitySchema],
     Breakfast: [BreakfastSchema],
     Lunch: [LunchSchema],

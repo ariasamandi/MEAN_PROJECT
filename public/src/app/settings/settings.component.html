@@ -1,7 +1,7 @@
 <div class="p-3 mb-2 bg-secondary text-white">
 <h1>Edit Schedule</h1>
 {{editing | json}}
-<form (submit)="editSchedule(this.editing)">
+<form (submit)="editSchedule(editing)">
         <h3>Breakfast time</h3><input type="time" name="editing.Breakfast_time" [(ngModel)]="editing.Breakfast_time">
         <h3>Lunch Time</h3><input type="time" name="editing.Lunch_time" [(ngModel)]="editing.Lunch_time">
         <h3>Dinner Time</h3><input type="time" name="editing.Dinner_time" [(ngModel)]="editing.Dinner_time">

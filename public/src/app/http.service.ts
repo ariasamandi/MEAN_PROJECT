@@ -7,6 +7,7 @@ export class HttpService {
 
   constructor(private _http: HttpClient) { }
    addSchedule(newSchedule: any){
+     console.log(newSchedule, "service loaded");
      return this._http.post('/api/create/schedule', newSchedule);
    }
    allSchedule(){
@@ -16,12 +17,13 @@ export class HttpService {
      return this._http.get(`/api/show/${id}`);
    }
    createFood(newFood: any){
-     return this._http.post('api/create/food', newFood)
+     return this._http.post('/api/create/food', newFood)
    }
    allBreakfast(){
-     return this._http.get(`api/breakfast`)
+     return this._http.get(`/api/breakfast`)
    }
-   editSchedule(edited: any){
-     return this._http.put(`api/schedule/edit/${edited._id}`, edited)
+   es(edited){
+     console.log(edited, "from service");
+     return this._http.put(`/api/schedule/edit/${edited._id}`, edited)
    }
 }

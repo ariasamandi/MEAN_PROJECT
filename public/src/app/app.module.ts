@@ -12,6 +12,7 @@ import { MealComponent } from './meal/meal.component';
 import { LunchComponent } from './lunch/lunch.component';
 import { DinnerComponent } from './dinner/dinner.component';
 import { TodayComponent } from './today/today.component';
+import { CalculateComponent } from './calculate/calculate.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TodayComponent } from './today/today.component';
     LunchComponent,
     DinnerComponent,
     TodayComponent,
+    CalculateComponent,
   ],
   imports: [
     BrowserModule,

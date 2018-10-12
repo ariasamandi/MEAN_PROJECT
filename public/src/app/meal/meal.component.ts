@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpService} from './../http.service';
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-meal',
   templateUrl: './meal.component.html',
@@ -8,11 +9,12 @@ import {HttpService} from './../http.service';
 })
 export class MealComponent implements OnInit {
   
-  constructor(private _http: HttpService, private _route: ActivatedRoute) { }
+  constructor(private _http: HttpService, private _route: ActivatedRoute, private _router: Router) { }
   newFood: any={};
   schedule: any;
   Breakfast: any;
   ngOnInit() {
+    this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
     console.log("before", this.Breakfast)
     this.getBreakfast();
     console.log("final", this.Breakfast)
@@ -34,6 +36,12 @@ export class MealComponent implements OnInit {
     this._http.allBreakfast().subscribe(all=>{
       this.Breakfast = all;
       console.log("this is brakwfast", this.Breakfast)
+    })
+  }
+  addFood(){
+    this._http.createFood(this.newFood).subscribe(data=>{
+      this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
+      this._router.navigate(['/meal/5b888497a22dac52d8195f7a'])
     })
   }
 }
