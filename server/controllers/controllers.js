@@ -16,6 +16,26 @@ module.exports = {
             }
         })
     },
+    getLunch: (req, res)=>{
+        Lunch.find({}, (err, lunch)=>{
+            if (err){
+                res.json(err);
+            }
+            else{
+                res.json(lunch);
+            }
+        })
+    },
+    getDinner: (req, res)=>{
+        Dinner.find({}, (err, dinner)=>{
+            if (err){
+                res.json(err);
+            }
+            else{
+                res.json(dinner);
+            }
+        })
+    },
     addBreakfast: (req, res)=>{
         //create passenger, then push to array
         console.log("this is the req.body", req.body);
@@ -43,7 +63,7 @@ module.exports = {
         //create passenger, then push to array
         Lunch.create(req.body, (err, lunch)=>{
             if(err){
-                console.log("Breakfast validations are TrIGeRRed")
+                console.log("Lunch validations are TrIGeRRed")
                 res.json(err);
             }
             else{

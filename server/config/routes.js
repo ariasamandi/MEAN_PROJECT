@@ -2,6 +2,8 @@ const Controller = require('./../controllers/controllers');
 const path = require('path');
 module.exports = (app)=>{
     app.get('/api/breakfast', Controller.getBreakfast);
+    app.get(`/api/lunch`, Controller.getLunch);
+    app.get(`/api/dinner`, Controller.getDinner);
     app.post('/api/create/breakfast/:s_id', Controller.addBreakfast);
     app.post('/api/create/lunch/:s_id', Controller.addLunch);
     app.post('/api/create/dinner/:s_id', Controller.addDinner);

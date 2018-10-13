@@ -1,10 +1,17 @@
 <div class="p-3 mb-2 bg-secondary text-white">
+    <style>
+        #wrapper{
+          background-color: #6c757d;
+          height:592px;
+        }
+      </style>
+  <div id=wrapper>
 <h1>Edit Schedule</h1>
-{{editing | json}}
 <form (submit)="editSchedule(editing)">
         <h3>Breakfast time</h3><input type="time" name="editing.Breakfast_time" [(ngModel)]="editing.Breakfast_time">
         <h3>Lunch Time</h3><input type="time" name="editing.Lunch_time" [(ngModel)]="editing.Lunch_time">
         <h3>Dinner Time</h3><input type="time" name="editing.Dinner_time" [(ngModel)]="editing.Dinner_time">
-        <input type="submit" value="Edit Schedule">
+        &nbsp;<input type="submit" class="btn btn-info" value="Edit Schedule">
       </form>
+  </div>
       </div>

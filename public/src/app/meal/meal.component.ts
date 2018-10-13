@@ -19,19 +19,20 @@ export class MealComponent implements OnInit {
     this.getBreakfast();
     console.log("final", this.Breakfast)
     
-    // this._route.params.subscribe(data=>{
-    //   this.getSchedule(data['id'])
-    //   console.log("this is da params", data['id']);
-    //   console.log(this.schedule);
-    // })
+    this._route.params.subscribe(data=>{
+      this.getSchedule(data['id'])
+      console.log("this is da params", data['id']);
+      this.schedule = data['id']
+      console.log("this is dat schedule", this.schedule);
+    })
   }
-  // getSchedule(id){
-  //   this._http.singleSchedule(id).subscribe(single=>{
-  //     console.log("this is da single", single);
-  //     this.schedule = single;
-  //     console.log("todays my birthdsy", this.schedule)
-  //   })
-  // }
+  getSchedule(id){
+    this._http.singleSchedule(id).subscribe(single=>{
+      console.log("this is da single", single);
+      this.schedule = single;
+      console.log("todays my birthdsy", this.schedule)
+    })
+  }
   getBreakfast(){
     this._http.allBreakfast().subscribe(all=>{
       this.Breakfast = all;
@@ -39,9 +40,12 @@ export class MealComponent implements OnInit {
     })
   }
   addFood(){
-    this._http.createFood(this.newFood).subscribe(data=>{
+    this._http.createBreakfast(this.newFood, this.schedule).subscribe(data=>{
+      console.log('this is da data', data)
       this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
-      this._router.navigate(['/meal/5b888497a22dac52d8195f7a'])
+      this.getBreakfast()
+      this._router.navigate([`/meal/${this.schedule}`])
+      console.log('this is da data', data)
     })
   }
 }

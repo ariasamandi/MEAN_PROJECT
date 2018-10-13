@@ -16,11 +16,25 @@ export class HttpService {
    singleSchedule(id: any){
      return this._http.get(`/api/show/${id}`);
    }
-   createFood(newFood: any){
-     return this._http.post('/api/create/food', newFood)
+   createBreakfast(newFood: any, s_id: string){
+     console.log(s_id)
+     return this._http.post(`/api/create/breakfast/${s_id}`, newFood)
+   }
+   createLunch(newFood: any, s_id: string){
+     console.log("Lunch Service")
+     return this._http.post(`/api/create/lunch/${s_id}`, newFood);
+   }
+   createDinner(newFood: any, s_id: string){
+     return this._http.post(`/api/create/dinner/${s_id}`, newFood)
    }
    allBreakfast(){
      return this._http.get(`/api/breakfast`)
+   }
+   allLunch(){
+     return this._http.get(`api/lunch`);
+   }
+   allDinner(){
+     return this._http.get(`/api/dinner`);
    }
    es(edited){
      console.log(edited, "from service");
