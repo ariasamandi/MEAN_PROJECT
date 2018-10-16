@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from './../http.service';
+import { Chart } from 'chart.js';
 @Component({
   selector: 'app-calculate',
   templateUrl: './calculate.component.html',
@@ -13,9 +14,13 @@ export class CalculateComponent implements OnInit {
   protein: any;
   carbs: any;
   fats: any;
+  chart: any;
 
   ngOnInit() {
     this.sum();
+    this.setchart();
+    console.log("chart", this.chart);
+    
   }
   sum(){
     this.calories = 0;
@@ -57,10 +62,45 @@ export class CalculateComponent implements OnInit {
         })
       console.log(this.calories)
   }
-  getBreakfast(){
-    this._http.allBreakfast().subscribe(all=>{
-      this.Breakfast = all;
-      console.log("this is brakwfast", this.Breakfast)
+  setchart(){
+    console.log(1);
+    var protein = this.protein;
+    var fats = this.fats;
+    var carbs = this.carbs;
+    this.chart = new Chart("pie", {
+      type: 'pie',
+      data: {
+        labels: [
+          'Red',
+          'Yellow',
+          'Blue'
+      ],
+        datasets: [
+          {
+            data: protein,
+            borderColor: '#3cba9f',
+            fill: false
+          },
+          {
+            data: carbs,
+            borderColor: '#3cba9f',
+            fill: false
+          },
+          {
+            data: fats,
+            borderColor: '#ffcc00',
+            fill: false
+          }
+        ]
+      },
+      options: {
+        title: {
+          text: "Pie Chart",
+          display: true,
+        },
+        responsive: false,
+        display: true,
+      }
     })
   }
 }
