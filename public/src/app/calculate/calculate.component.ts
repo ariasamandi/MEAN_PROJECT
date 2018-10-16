@@ -27,7 +27,7 @@ export class CalculateComponent implements OnInit {
     this.protein = 0;
     this.carbs = 0;
     this.fats = 0;
-    this._http.allBreakfast().subscribe(all=>{
+    this._http.allBreakfast().subscribe((all:any)=>{
       console.log(all[0].calories);
       console.log("the length is", all.length)
       for(var i = 0; i < all.length; i++){
@@ -38,7 +38,7 @@ export class CalculateComponent implements OnInit {
 
       }
     })
-      this._http.allLunch().subscribe(all=>{
+      this._http.allLunch().subscribe((all:any)=>{
         console.log(all[0].calories);
         console.log("the length is", all.length)
         for(var i = 0; i < all.length; i++){
@@ -49,7 +49,7 @@ export class CalculateComponent implements OnInit {
   
         }
       })
-        this._http.allDinner().subscribe(all=>{
+        this._http.allDinner().subscribe((all: any)=>{
           console.log(all[0].calories);
           console.log("the length is", all.length)
           for(var i = 0; i < all.length; i++){
