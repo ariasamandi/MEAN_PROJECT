@@ -68,39 +68,34 @@ export class CalculateComponent implements OnInit {
     var fats = this.fats;
     var carbs = this.carbs;
     this.chart = new Chart("pie", {
-      type: 'pie',
-      data: {
-        labels: [
-          'Red',
-          'Yellow',
-          'Blue'
-      ],
-        datasets: [
-          {
-            data: protein,
-            borderColor: '#3cba9f',
-            fill: false
-          },
-          {
-            data: carbs,
-            borderColor: '#3cba9f',
-            fill: false
-          },
-          {
-            data: fats,
-            borderColor: '#ffcc00',
-            fill: false
-          }
-        ]
-      },
-      options: {
-        title: {
-          text: "Pie Chart",
-          display: true,
-        },
-        responsive: false,
-        display: true,
-      }
-    })
+      type:'pie', //bar, pie, horizontal, line, doughnut, radar , polar
+            data: {
+                labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'NewBedFord'],
+                datasets: [{
+                    label: 'population',
+                    data: [
+                        4525324,
+                        7654345,
+                        4239752,
+                        7234895,
+                        3480324,
+                        6523657,
+                    ],
+                     backgroundColor: 
+                    [
+                      'rgba(255, 99, 132, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 159, 64, 0.6)',
+                      'rgba(255, 99, 132, 0.6)',
+                    ],
+                    borderWidth: 4,
+                    borderColor: '#777'
+                }]
+            },
+            options: {}
+        });
   }
 }

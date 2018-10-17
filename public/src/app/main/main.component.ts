@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http'
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  
   constructor(private _httpService: HttpService,private _http: HttpClient){}
   title = 'To Your Workout Schedule';
   hasSchedule = true;

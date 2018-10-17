@@ -1,20 +1,18 @@
 <style>
     #wrapper{
       background-color: #6c757d;
-      height:565px;
+      height:8px;
     } 
   </style> 
-  <script src="path/to/chartjs/dist/Chart.js"></script>
-  <script src="node_modules/chart.js/Chart.min.js"></script>
-  <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <div id=wrapper>
     <h1>Your Calculated Calories for today are: {{calories}}</h1>
     <h1>Your calculated protein are: {{protein}}</h1>
     <h1>Your calculated carbs are: {{carbs}}</h1>
     <h1> Your calculated Fats are: {{fats}}</h1>
-    <div *ngIf="chart">
+    <div>    
+    <canvas id="pie"></canvas>
+    </div>
     <canvas id="pie" class="chart chart-pie"
-    chart-data="data" chart-labels="labels" chart-options="options">
-    {{chart}}</canvas> 
-  </div> 
-  </div>
+    chart-data="data" chart-labels="labels" chart-options="options"></canvas>
+    </div>
