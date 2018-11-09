@@ -13,6 +13,7 @@ import { LunchComponent } from './lunch/lunch.component';
 import { DinnerComponent } from './dinner/dinner.component';
 import { TodayComponent } from './today/today.component';
 import { CalculateComponent } from './calculate/calculate.component';
+import { LogRegComponent } from './log-reg/log-reg.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CalculateComponent } from './calculate/calculate.component';
     DinnerComponent,
     TodayComponent,
     CalculateComponent,
+    LogRegComponent,
   ],
   imports: [
     BrowserModule,

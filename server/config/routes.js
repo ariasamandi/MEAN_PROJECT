@@ -13,6 +13,9 @@ module.exports = (app)=>{
     app.get('/api/show/:id', Controller.singleSchedule);
     app.delete('/api/delete/:id', Controller.deleteSchedule);
     app.put('/api/schedule/edit/:id', Controller.editSchedule);
+    app.post('/api/login', Controller.login);
+    app.post(`/api/register`, Controller.register);
+    app.get('/api/users', Controller.users);
     app.all('*', (req, res)=> res.sendFile(path.resolve('./public/dist/public/index.html')));
     
 }

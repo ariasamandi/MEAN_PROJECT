@@ -35,6 +35,14 @@ const ScheduleSchema = mongoose.Schema({
     Dinner: [DinnerSchema]
 
 });
+const UserSchema = mongoose.Schema({
+    first_name: {type: String, required: [true, "enter name"]},
+    last_name: {type: String, required: [true, "must enter last name"]},
+    username: {type: String, required: [true, "must enter username"]},
+    password: {type: String, required: [true, "must enter password"]},
+    schedule: [ScheduleSchema]
+})
+mongoose.model('User', UserSchema);
 mongoose.model('Breakfast', BreakfastSchema);
 mongoose.model('Lunch', LunchSchema);
 mongoose.model('Dinner', DinnerSchema);

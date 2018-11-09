@@ -8,9 +8,11 @@ import { LunchComponent } from './lunch/lunch.component';
 import { DinnerComponent } from './dinner/dinner.component';
 import { TodayComponent } from './today/today.component';
 import { CalculateComponent } from './calculate/calculate.component';
+import { LogRegComponent } from './log-reg/log-reg.component';
 const routes: Routes = [
+  {path: '', component: LogRegComponent},
   {path: 'meal/:id', component: MealComponent},
-  {path: '', component: MainComponent},
+  {path: 'dashboard', component: MainComponent},
   {path: 'settings/:id', component: SettingsComponent},
   {path: 'addSchedule', component: AddScheuleComponent},
   {path: 'lunch/:id', component: LunchComponent},

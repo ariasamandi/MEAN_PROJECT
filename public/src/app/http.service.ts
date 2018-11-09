@@ -11,24 +11,24 @@ export class HttpService {
      return this._http.post('/api/create/schedule', newSchedule);
    }
    allSchedule(){
-     return this._http.get('/api/schedule')
+     return this._http.get('/api/schedule');
    }
    singleSchedule(id: any){
      return this._http.get(`/api/show/${id}`);
    }
    createBreakfast(newFood: any, s_id: string){
      console.log(s_id)
-     return this._http.post(`/api/create/breakfast/${s_id}`, newFood)
+     return this._http.post(`/api/create/breakfast/${s_id}`, newFood);
    }
    createLunch(newFood: any, s_id: string){
      console.log("Lunch Service")
      return this._http.post(`/api/create/lunch/${s_id}`, newFood);
    }
    createDinner(newFood: any, s_id: string){
-     return this._http.post(`/api/create/dinner/${s_id}`, newFood)
+     return this._http.post(`/api/create/dinner/${s_id}`, newFood);
    }
    allBreakfast(){
-     return this._http.get(`/api/breakfast`)
+     return this._http.get(`/api/breakfast`);
    }
    allLunch(){
      return this._http.get(`api/lunch`);
@@ -38,6 +38,12 @@ export class HttpService {
    }
    es(edited){
      console.log(edited, "from service");
-     return this._http.put(`/api/schedule/edit/${edited._id}`, edited)
+     return this._http.put(`/api/schedule/edit/${edited._id}`, edited);
+   }
+   login(s){
+     return this._http.post(`/api/login`, s);
+   }
+   register(s){
+     return this._http.post(`/api/register`, s);
    }
 }

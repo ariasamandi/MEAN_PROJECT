@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpService} from './../http.service';
 import {Router} from '@angular/router'
+declare var $:any;
 @Component({
   selector: 'app-meal',
   templateUrl: './meal.component.html',
@@ -47,5 +48,10 @@ export class MealComponent implements OnInit {
       this._router.navigate([`/meal/${this.schedule}`])
       console.log('this is da data', data)
     })
+  }
+
+  searchItem(){
+  $('#itemFor').addClass('testFor');
+    
   }
 }

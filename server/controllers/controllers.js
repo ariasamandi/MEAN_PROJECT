@@ -4,7 +4,8 @@ const Lunch = mongoose.model('Lunch');
 const Dinner = mongoose.model('Dinner');
 const Activity = mongoose.model('Activity');
 const Schedule = mongoose.model('Schedule');
-var request = require('request');
+const User = mongoose.model('User');
+const bcrypt =  require('bcrypt-promise');
 module.exports = {
     getBreakfast: (req, res)=>{
         Breakfast.find({}, (err, food)=>{
@@ -190,5 +191,57 @@ module.exports = {
                 res.json(data);
             }
         })
-    } 
+    }, 
+    login: (req, res)=>{
+        console.log(" req.body: ", req.body);
+        User.findOne({username:req.body.username, password: req.body.password}, (err, user) => {
+            console.log("user", user)
+            if (user) {
+                console.log("we in the if statement boys")
+                bcrypt.compare('password_from_form', 'stored_hashed_password').then( result => {
+                    if(result){
+                        console.log("sucess!")
+                        req.session.user_id = user._id;
+                        req.session.first_name = user.first_name;
+                    } 
+                    else{
+                        
+                        res.redirect('/')
+                    }    
+                })
+                .catch( error => {
+                     console.log("something went wrong")
+                })
+            }
+            else {
+            
+                res.redirect('/');
+            }
+        }) 
+    },
+    register: (req, res)=>{
+        console.log("req.body: ", req.body);
+        User.create(req.body, (err, user)=>{
+            if(err){
+                res.json(err);
+            }
+            else{
+                bcrypt.hash('password_from_form', 10).then(hashed_password => {
+
+                })
+                .catch(error => {
+                });
+            }
+        })
+    },
+    users: (req, res)=>{
+        User.find({}, (err, users)=>{
+            if(err){
+                res.json(err);
+            }
+            else{
+                res.json(users);
+            }
+        })
+    }
 }
