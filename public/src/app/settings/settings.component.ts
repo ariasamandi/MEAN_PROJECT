@@ -14,20 +14,20 @@ export class SettingsComponent implements OnInit {
   constructor(private _httpService: HttpService,  private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._route.params.subscribe((params: Params)=> {
-      let p = params['id'];
-      console.log(p)
-      this._httpService.singleSchedule(p).subscribe(data=>{
-      console.log(data);
-      this.editing = data;
+    this._httpService.sessionUser().subscribe(d=>{
+      console.log("session user: ", d);
     })
-  })
+      this._httpService.sessionUser().subscribe(data=>{
+      console.log("single schedule data: ", data['schedule'][0]['Breakfast_time']);
+      this.schedule = data['schedule'][0];
+      console.log(this.schedule);
+    })
 }
-  editSchedule(editing){
-    console.log(editing, "edited");
-    this._httpService.es(editing).subscribe(data=>{
+  editSchedule(schedule){
+    console.log(schedule, "edited");
+    this._httpService.es(schedule).subscribe(data=>{
       console.log(data);
-      this._router.navigate(['/'])
+      this._router.navigate(['/dashboard'])
     })
   }
   getSchedule(schedule){

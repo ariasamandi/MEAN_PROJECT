@@ -16,6 +16,8 @@ module.exports = (app)=>{
     app.post('/api/login', Controller.login);
     app.post(`/api/register`, Controller.register);
     app.get('/api/users', Controller.users);
+    app.get('/api/session', Controller.sessionUser);
+    app.get('/logout', Controller.logout);
     app.all('*', (req, res)=> res.sendFile(path.resolve('./public/dist/public/index.html')));
     
 }

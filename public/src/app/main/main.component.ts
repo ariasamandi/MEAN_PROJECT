@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpService} from './../http.service';
 import {HttpClient} from '@angular/common/http'
+import { ActivatedRoute, Route } from '@angular/router';
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -8,20 +10,33 @@ import {HttpClient} from '@angular/common/http'
 })
 export class MainComponent implements OnInit {
   
-  constructor(private _httpService: HttpService,private _http: HttpClient){}
+  constructor(private _httpService: HttpService,private _http: HttpClient,private _route:ActivatedRoute, private _router: Router ){}
   title = 'To Your Workout Schedule';
-  hasSchedule = true;
+  hasSchedule: any;
   schedule: any;
+  user: any;
   ngOnInit(){
-   this._httpService.allSchedule().subscribe(data=>{
-    
-    this.schedule = data[0];
-    if(data){
-      this.hasSchedule = true;
+    this._httpService.sessionUser().subscribe(hi=>{
+      if(!hi){
+        this._router.navigate([`/`])
+      }
+    })
+    console.log(this.hasSchedule)
+
+   
+    this._httpService.sessionUser().subscribe(datal=> {
+      console.log("me", datal);
+      this.user = datal;
+      console.log("schedule is: ",datal['schedule'][0])
+      this.schedule = datal['schedule'][0];
+      if(datal['schedule'][0]){
+        this.hasSchedule = true;
+      }
+      else{
+        this.hasSchedule = false;
+      }
+      })
+  
     }
-    else{
-      this.hasSchedule = false;
-    }
-})
-  }
+
 }

@@ -17,6 +17,7 @@ export class HttpService {
      return this._http.get(`/api/show/${id}`);
    }
    createBreakfast(newFood: any, s_id: string){
+     console.log("we got to the createBreakfast server")
      console.log(s_id)
      return this._http.post(`/api/create/breakfast/${s_id}`, newFood);
    }
@@ -41,9 +42,17 @@ export class HttpService {
      return this._http.put(`/api/schedule/edit/${edited._id}`, edited);
    }
    login(s){
+     console.log("service")
      return this._http.post(`/api/login`, s);
    }
    register(s){
      return this._http.post(`/api/register`, s);
+   }
+   sessionUser(){
+     console.log("service sessionuser")
+    return this._http.get(`api/session/`)
+   }
+   register2(){
+     return this._http.get('api/register');
    }
 }

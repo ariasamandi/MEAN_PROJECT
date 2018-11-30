@@ -19,33 +19,28 @@ export class MealComponent implements OnInit {
     console.log("before", this.Breakfast)
     this.getBreakfast();
     console.log("final", this.Breakfast)
-    
-    this._route.params.subscribe(data=>{
-      this.getSchedule(data['id'])
-      console.log("this is da params", data['id']);
-      this.schedule = data['id']
-      console.log("this is dat schedule", this.schedule);
-    })
+    this.getSchedule();
   }
-  getSchedule(id){
-    this._http.singleSchedule(id).subscribe(single=>{
-      console.log("this is da single", single);
-      this.schedule = single;
-      console.log("todays my birthdsy", this.schedule)
+  getSchedule(){
+    this._http.sessionUser().subscribe(sesh=>{
+      console.log("this is sesh", sesh['schedule'][0])
+      this.schedule = sesh['schedule'][0];
     })
   }
   getBreakfast(){
-    this._http.allBreakfast().subscribe(all=>{
-      this.Breakfast = all;
-      console.log("this is brakwfast", this.Breakfast)
+    this._http.sessionUser().subscribe(all=>{
+      console.log("all", all['schedule'][0]['Breakfast'])
+      this.Breakfast = all['schedule'][0]['Breakfast'];
+      // console.log("this is brakwfast", this.Breakfast.schedule[0].Breakfast)
     })
   }
   addFood(){
-    this._http.createBreakfast(this.newFood, this.schedule).subscribe(data=>{
+    console.log("Start of add food function")
+    this._http.createBreakfast(this.newFood, this.schedule['_id']).subscribe(data=>{
       console.log('this is da data', data)
       this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
       this.getBreakfast()
-      this._router.navigate([`/meal/${this.schedule}`])
+      this._router.navigate([`/meal/${this.schedule._id}`])
       console.log('this is da data', data)
     })
   }

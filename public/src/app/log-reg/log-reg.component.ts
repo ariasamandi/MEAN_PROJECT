@@ -12,10 +12,11 @@ export class LogRegComponent implements OnInit {
 
   constructor(private _httpService: HttpService,private _http: HttpClient, private _router: Router) { }
   s: any={};
+  showNav = true;
   ngOnInit() {
     $( document ).ready(function() {
       console.log( "ready!" );
-    
+    this.showNav = true
     $(function() {
    
   $('#login-form-link').click(function(e) {
@@ -39,8 +40,9 @@ export class LogRegComponent implements OnInit {
   login(){
     this._httpService.login(this.s).subscribe(data=>{
       console.log('hi')
-      console.log(data);
+      console.log("this is the data", data);
       this.s = data;
+      this._router.navigate(['/dashboard'])
 
     });
     
@@ -53,5 +55,6 @@ export class LogRegComponent implements OnInit {
       this._router.navigate([`/dashboard`])
     })
   }
+  
 
 }

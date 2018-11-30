@@ -5,7 +5,10 @@ const Dinner = mongoose.model('Dinner');
 const Activity = mongoose.model('Activity');
 const Schedule = mongoose.model('Schedule');
 const User = mongoose.model('User');
+const express = require('express');
 const bcrypt =  require('bcrypt-promise');
+const session = require('express-session');
+const app = express();
 module.exports = {
     getBreakfast: (req, res)=>{
         Breakfast.find({}, (err, food)=>{
@@ -38,67 +41,61 @@ module.exports = {
         })
     },
     addBreakfast: (req, res)=>{
-        //create passenger, then push to array
-        console.log("this is the req.body", req.body);
-        Breakfast.create(req.body, (err, breakfast)=>{
-            if(err){
-                console.log("Breakfast validations are TrIGeRRed")
-                res.json(err);
-            }
-            else{
-                console.log("this is the breakfast", breakfast)
-                Schedule.update({_id: req.params.s_id}, {$push: {Breakfast: breakfast}}, (err, data)=>{
-                    if(err){
-                        console.log("couldnt update Schedule");
-                        res.json(err);
-                    }
-                    else{
-                        console.log("this is the data", data);
-                        res.json(data);
-                    }
-                })
-            }
-        })
+        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
+        {
+            "$push": {
+                "schedule.$.Breakfast": req.body,
+        }
+    },
+        
+    (err, data)=>{
+        if(err){
+            console.log("ERROROROROR", err);
+            res.json(err)
+        } else {
+            console.log("DATATATAT", data)
+            res.json(data)
+        }
+    })
+
     },
     addLunch: (req, res)=>{
-        //create passenger, then push to array
-        Lunch.create(req.body, (err, lunch)=>{
-            if(err){
-                console.log("Lunch validations are TrIGeRRed")
-                res.json(err);
-            }
-            else{
-                Schedule.update({_id: req.params.s_id}, {$push: {Lunch: lunch}}, (err, data)=>{
-                    if(err){
-                        console.log("couldnt update Schedule");
-                        res.json(err);
-                    }
-                    else{
-                        res.json(data);
-                    }
-                })
-            }
-        })
+        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
+        {
+            "$push": {
+                "schedule.$.Lunch": req.body,
+        }
+    },
+        
+    (err, data)=>{
+        if(err){
+            console.log("ERROROROROR", err);
+            res.json(err)
+        } else {
+            console.log("DATATATAT", data)
+            res.json(data)
+        }
+    })
+
     },
     addDinner: (req, res)=>{
-        //create passenger, then push to array
-        Dinner.create(req.body, (err, dinner)=>{
-            if(err){
-                console.log("Dinner validations are TrIGeRRed")
-                res.json(err);
-            }
-            else{
-                Schedule.update({_id: req.params.s_id}, {$push: {Dinner: dinner}}, (err, data)=>{
-                    if(err){
-                        console.log("couldnt update Schedule");
-                        res.json(err);
-                    }
-                    else{
-                        res.json(data);
-                    }
-                })
-            }
-        })
+        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
+        {
+            "$push": {
+                "schedule.$.Dinner": req.body,
+        }
+    },
+        
+    (err, data)=>{
+        if(err){
+            console.log("ERROROROROR", err);
+            res.json(err)
+        } else {
+            console.log("DATATATAT", data)
+            res.json(data)
+        }
+    })
+
     },
     singleFood: (req, res)=>{
         Breakfast.findOne({_id: req.params.id}, (err, food)=>{
@@ -141,15 +138,25 @@ module.exports = {
         })
     },
     addSchedule: (req, res)=>{
-        Schedule.create(req.body, (err, schedule)=>{
-            console.log("hi", schedule)
+        console.log("user session", req.session.first_name)
+        User.findOne({first_name: req.session.first_name}, (err, user)=>{
+            console.log("hi", user)
             if(err){
                 res.json(err);
             }
             else{
-                res.json(schedule);
-            }
-        })
+                User.update({_id: user._id}, {$push: {schedule: req.body}}, (err, data)=>{
+                    if(err){
+                        res.json(err)
+                    }
+                    else{
+                        console.log("SUCCC!")
+                        res.json(data);
+                    }
+            })
+        }
+    })
+    
     },
     allSchedule: (req, res)=>{
         Schedule.find({}, (err, data)=>{
@@ -162,11 +169,15 @@ module.exports = {
         })
     },
     singleSchedule: (req, res)=>{
-        Schedule.findOne({_id: req.params.id}, (err, schedule)=>{
+        console.log("just to make sure", req.params.id)
+        Schedule.findById({_id: req.params.id}, (err, schedule)=>{
+            console.log("Scheudle before err", schedule)
             if(err){
+                console.log(err);
                 res.json(err);
             }
             else{
+                console.log("controlllllerr ", schedule);
                 res.json(schedule);
             }
         })
@@ -183,29 +194,72 @@ module.exports = {
     },
     editSchedule: (req, res)=>{
         console.log("we in motion")
-        Schedule.update({_id: req.params.id}, req.body, (err, data)=>{
+        console.log(req.session);
+        console.log(req.body);
+        console.log(req.params.id);
+        console.log("session id: ", req.session.first_name)
+        console.log("BODY", req.body);
+        
+        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.body._id}, 
+            {
+                "$set": {
+                    "schedule.$.Breakfast_time": req.body.Breakfast_time,
+                    "schedule.$.Lunch_time": req.body.Lunch_time,
+                    "schedule.$.Dinner_time": req.body.Dinner_time,
+            }
+        },
+            
+        (err, data)=>{
             if(err){
-                res.json(err);
+                console.log("ERROROROROR", err);
+                res.json(err)
+            } else {
+                console.log("DATATATAT", data)
+                res.json(data)
             }
-            else{
-                res.json(data);
-            }
+
+
+
+        //     console.log("USER ERR", err)
+        //     console.log("USER DATA", data)
+        //     if(err){
+        //         res.json(err);
+        //     }
+        //     else{
+        //         // Schedule.updateOne({_id: req.params.id}, {$push: {Breakfast_time: req.body.Breakfast_time, Lunch_time: req.body.Lunch_time, Dinner_time: req.body.Dinner_time}}, (err, data)=>{
+        //         //     if(err){
+        //         //         console.log(err);
+        //         //         res.json(err);
+        //         //     }
+        //         //     else{
+        //         //         console.log(data);
+        //         //         res.json(data);
+        //         //     }
+                
+        //         // })
+        //         Schedule.
+        //     }   
         })
     }, 
     login: (req, res)=>{
         console.log(" req.body: ", req.body);
-        User.findOne({username:req.body.username, password: req.body.password}, (err, user) => {
+        User.findOne({username:req.body.username}, (err, user) => {
             console.log("user", user)
             if (user) {
                 console.log("we in the if statement boys")
-                bcrypt.compare('password_from_form', 'stored_hashed_password').then( result => {
+                console.log("1: ", req.body.password, "2: ", user.password)
+                bcrypt.compare(req.body.password, user.password).then( result => {
+                    console.log(result)
                     if(result){
-                        console.log("sucess!")
+                        console.log("sucess.,!")
                         req.session.user_id = user._id;
                         req.session.first_name = user.first_name;
+                        console.log("i am session user", req.session.user_id);
+                        console.log("session", req.session)
+                        res.json(user, req.session.user_id, req.session.first_name)
                     } 
                     else{
-                        
+                        console.log("err")
                         res.redirect('/')
                     }    
                 })
@@ -221,18 +275,25 @@ module.exports = {
     },
     register: (req, res)=>{
         console.log("req.body: ", req.body);
-        User.create(req.body, (err, user)=>{
-            if(err){
-                res.json(err);
-            }
-            else{
-                bcrypt.hash('password_from_form', 10).then(hashed_password => {
-
-                })
-                .catch(error => {
-                });
-            }
+        bcrypt.hash(req.body.password, 10).then(hashed_password => {
+            
+            User.create({first_name: req.body.first_name,  last_name: req.body.last_name, username: req.body.username, password: hashed_password}, (err, user)=>{
+                if(err){
+                    res.json(err);
+                }
+                else{
+                   console.log(user);
+                   req.session.user_id = user._id;
+                   req.session.first_name = user.first_name;
+                   console.log("i am session user", req.session.user_id);
+                   res.json(user);
+                }
+            })
         })
+        .catch(error => {
+            console.log("something went wrong")
+        });
+        
     },
     users: (req, res)=>{
         User.find({}, (err, users)=>{
@@ -243,5 +304,23 @@ module.exports = {
                 res.json(users);
             }
         })
+    },
+    sessionUser: (req, res)=>{
+        console.log(req.session)
+        console.log(req.session.user_id);
+        User.findOne({_id: req.session.user_id}, (err, user)=>{
+            if(err){
+                res.json(err);
+            }
+            else{
+                res.json(user);
+            }
+        })
+        console.log(req.session.first_name)
+
+    },
+    logout: (req, res)=>{
+        req.session.destroy();
+        res.redirect('/')
     }
 }

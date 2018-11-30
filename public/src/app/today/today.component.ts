@@ -18,30 +18,32 @@ export class TodayComponent implements OnInit {
     this.getBreakfast();
     this.getLunch();
     this.getDinner();
-    this._route.params.subscribe(data=>{
-      this.getSchedule(data['id'])
-      console.log("this is da params", data['id']);
-      this.schedule = data['id']
-      console.log("this is dat schedule", this.schedule);
-  })
+   this._http.sessionUser().subscribe(data=>{
+     console.log("data", data['schedule'][0]);
+     this.schedule = data['schedule'][0];
+     
+   })
 }
   getBreakfast(){
-    this._http.allBreakfast().subscribe(all=>{
-      this.Breakfast = all;
+    this._http.sessionUser().subscribe(all=>{
+      console.log("all:", all)
+      this.Breakfast = all['schedule'][0]['Breakfast'];
       console.log("this is brakwfast", this.Breakfast)
     })
     
   }
   getLunch(){
-    this._http.allLunch().subscribe(all=>{
-      this.Lunch = all;
-      console.log("this is brakwfast", this.Lunch)
+    this._http.sessionUser().subscribe(all=>{
+      console.log("all:", all)
+      this.Lunch = all['schedule'][0]['Lunch'];
+      console.log("this is Lunch", this.Lunch)
     })
   }
   getDinner(){
-    this._http.allDinner().subscribe(all=>{
-      this.Dinner = all;
-      console.log("this is dinner", this.Dinner)
+    this._http.sessionUser().subscribe(all=>{
+      console.log("all:", all)
+      this.Dinner = all['schedule'][0]['Dinner'];
+      console.log("this is Dinner", this.Dinner)
     })
   }
   getSchedule(id){

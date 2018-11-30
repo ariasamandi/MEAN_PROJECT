@@ -18,7 +18,7 @@ export class AddScheuleComponent implements OnInit {
     this._httpService.addSchedule(this.newSchedule).subscribe(data=>{
       console.log(data);
       this.newSchedule = {breakfast_time: "", lunch_time: "", dinner_time: ""}
-          this._router.navigate(['/'])
+          this._router.navigate(['/dashboard'])
     })
   }
 }

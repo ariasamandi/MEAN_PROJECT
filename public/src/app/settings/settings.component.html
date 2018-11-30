@@ -7,10 +7,10 @@
       </style>
   <div id=wrapper>
 <h1>Edit Schedule</h1>
-<form (submit)="editSchedule(editing)">
-        <h3>Breakfast time</h3><input type="time" name="editing.Breakfast_time" [(ngModel)]="editing.Breakfast_time">
-        <h3>Lunch Time</h3><input type="time" name="editing.Lunch_time" [(ngModel)]="editing.Lunch_time">
-        <h3>Dinner Time</h3><input type="time" name="editing.Dinner_time" [(ngModel)]="editing.Dinner_time">
+<form (submit)="editSchedule(schedule)">
+        <h3>Breakfast time</h3><input type="time" name="schedule.Breakfast_time" [(ngModel)]="schedule.Breakfast_time">
+        <h3>Lunch Time</h3><input type="time" name="schedule.Lunch_time" [(ngModel)]="schedule.Lunch_time">
+        <h3>Dinner Time</h3><input type="time" name="schedule.Dinner_time" [(ngModel)]="schedule.Dinner_time">
         &nbsp;<input type="submit" class="btn btn-info" value="Edit Schedule">
       </form>
   </div>

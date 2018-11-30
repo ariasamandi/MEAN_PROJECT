@@ -6,9 +6,9 @@
 </style>
 <div id=wrapper>
 <div class="p-3 mb-2 bg-secondary text-white">
-  <div *ngIf="schedule">
+  <div *ngIf="hasSchedule == true">
 
-    <h2>Welcom {{user}} to your Schedule</h2>
+    <h2>Welcome {{user.first_name}} to your Schedule</h2>
     <table class="table">
         <thead>
           <tr>
@@ -20,27 +20,27 @@
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>{{schedule.Breakfast_time}}</td>
+            <td>{{user.schedule[0].Breakfast_time}}</td>
             <td><a [routerLink]="['/meal', schedule._id]">Breakfast</a></td>
           </tr>
           <tr>
             <th scope="row">2</th>
-            <td>{{schedule.Lunch_time}}</td>
+            <td>{{user.schedule[0].Lunch_time}}</td>
             <td><a [routerLink]="['/lunch', schedule._id]">Lunch</a></td>
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td>{{schedule.Dinner_time}}</td>
+            <td>{{user.schedule[0].Dinner_time}}</td>
             <td><a [routerLink]="['/dinner', schedule._id]">Dinner</a></td>
           </tr>
         </tbody>
       </table>
-  <button type="button" class="btn btn-info" [routerLink]="['calc']">Calculate Calories</button>&nbsp;
+  <button type="button" class="btn btn-info" [routerLink]="['/calc']">Calculate Calories</button>&nbsp;
   <button type="button" class="btn btn-info" [routerLink]="['/today', schedule._id]">Today's Food</button>&nbsp;
   <button type="button" class="btn btn-info" [routerLink]="['/settings', schedule._id]">Edit Schedule</button>
   </div>
-  <div *ngIf="schedule == false">
-    <button [routerLink] = "['/addSchedule']">Add Schedule</button>
+  <div *ngIf="hasSchedule == false">
+    <button type="button" class="btn btn-primary btn-lg btn-block" [routerLink] = "['/addSchedule']">Add Schedule</button>
   </div>
   </div>
   <script src="http://platform.fatsecret.com/js?key=14679b4a576345ca8e99efcf53ffaa91&auto_load=true"></script>

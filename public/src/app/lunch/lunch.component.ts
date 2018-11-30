@@ -18,32 +18,28 @@ export class LunchComponent implements OnInit {
     console.log("before", this.Lunch)
     this.getLunch();
     console.log("final", this.Lunch)
-    
-    this._route.params.subscribe(data=>{
-      this.getSchedule(data['id'])
-      console.log("this is da params", data['id']);
-      this.schedule = data['id']
-      console.log("this is dat schedule", this.schedule);
-    })
+    this.getSchedule();
   }
-  getSchedule(id){
-    this._http.singleSchedule(id).subscribe(single=>{
-      console.log("this is da single", single);
-      console.log("todays my birthdsy", this.schedule)
+  getSchedule(){
+    this._http.sessionUser().subscribe(sesh=>{
+      console.log("this is sesh", sesh['schedule'][0])
+      this.schedule = sesh['schedule'][0];
     })
   }
   getLunch(){
-    this._http.allLunch().subscribe(all=>{
-      this.Lunch = all;
-      console.log("this is brakwfast", this.Lunch)
+    this._http.sessionUser().subscribe(all=>{
+      console.log("all", all['schedule'][0]['Lunch'])
+      this.Lunch = all['schedule'][0]['Lunch'];
+      // console.log("this is brakwfast", this.Breakfast.schedule[0].Breakfast)
     })
   }
   addFood(){
-    this._http.createLunch(this.newFood, this.schedule).subscribe(data=>{
+    console.log("Start of add food function")
+    this._http.createLunch(this.newFood, this.schedule['_id']).subscribe(data=>{
       console.log('this is da data', data)
       this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
       this.getLunch()
-      this._router.navigate([`/lunch/${this.schedule}`])
+      this._router.navigate([`/lunch/${this.schedule._id}`])
       console.log('this is da data', data)
     })
   }

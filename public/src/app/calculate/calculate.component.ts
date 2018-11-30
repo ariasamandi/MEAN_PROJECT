@@ -27,42 +27,39 @@ export class CalculateComponent implements OnInit {
     this.protein = 0;
     this.carbs = 0;
     this.fats = 0;
-    this._http.allBreakfast().subscribe((all:any)=>{
-      console.log(all[0].calories);
-      console.log("the length is", all.length)
-      for(var i = 0; i < all.length; i++){
-        this.calories += all[i].calories;
-        this.protein += all[i].protein;
-        this.carbs += all[i].carbs;
-        this.fats += all[i].fat;
+    this._http.sessionUser().subscribe((all:any)=>{
+      console.log(all['schedule'][0]['Breakfast'][0].calories);
+      console.log("the length is", all['schedule'][0]['Breakfast'].length)
+      for(var i = 0; i < all['schedule'][0]['Breakfast'].length; i++){
+        this.calories += all['schedule'][0]['Breakfast'][i].calories;
+        this.protein += all['schedule'][0]['Breakfast'][i].protein;
+        this.carbs += all['schedule'][0]['Breakfast'][i].carbs;
+        this.fats += all['schedule'][0]['Breakfast'][i].fat;
         console.log(this.fats, "breakfast fats")
       }
       console.log(this.protein, "breakfast protein")
-    })
-      this._http.allLunch().subscribe((all:any)=>{
-        console.log(all[0].calories);
-        console.log("the length is", all.length)
-        for(var i = 0; i < all.length; i++){
-          this.calories += all[i].calories;
-          this.protein += all[i].protein;
-          this.carbs += all[i].carbs;
-          this.fats += all[i].fat;
-        }
-      })
-        this._http.allDinner().subscribe((all: any)=>{
-          console.log(all[0].calories);
-          console.log("the length is", all.length)
-          for(var i = 0; i < all.length; i++){
-            this.calories += all[i].calories;
-            this.protein += all[i].protein;
-            this.carbs += all[i].carbs;
-            this.fats += all[i].fat;
+      console.log(all['schedule'][0]['Lunch'][0].calories);
+      console.log("the length is", all['schedule'][0]['Lunch'].length)
+      for(var i = 0; i < all['schedule'][0]['Lunch'].length; i++){
+        this.calories += all['schedule'][0]['Lunch'][i].calories;
+        this.protein += all['schedule'][0]['Lunch'][i].protein;
+        this.carbs += all['schedule'][0]['Lunch'][i].carbs;
+        this.fats += all['schedule'][0]['Lunch'][i].fat;
+      }
+      console.log(all['schedule'][0]['Dinner'].calories);
+          console.log("the length is", all['schedule'][0]['Dinner'].length)
+          for(var i = 0; i < all['schedule'][0]['Dinner'].length; i++){
+            this.calories += all['schedule'][0]['Dinner'][i].calories;
+            this.protein += all['schedule'][0]['Dinner'][i].protein;
+            this.carbs += all['schedule'][0]['Dinner'][i].carbs;
+            this.fats += all['schedule'][0]['Dinner'][i].fat;
             this.setchart();
             
           }
           var p = this.protein;
           console.log(this.fats, "dinner fats")
-        })
+    })
+      
       
       console.log(this.calories)
       console.log(this.protein, "protein")
