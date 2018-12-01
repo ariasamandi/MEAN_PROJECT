@@ -14,6 +14,7 @@ export class MealComponent implements OnInit {
   newFood: any={};
   schedule: any;
   Breakfast: any;
+  errors = [];
   ngOnInit() {
     this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
     console.log("before", this.Breakfast)
@@ -37,11 +38,21 @@ export class MealComponent implements OnInit {
   addFood(){
     console.log("Start of add food function")
     this._http.createBreakfast(this.newFood, this.schedule['_id']).subscribe(data=>{
-      console.log('this is da data', data)
-      this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
-      this.getBreakfast()
-      this._router.navigate([`/meal/${this.schedule._id}`])
-      console.log('this is da data', data)
+      this.errors = [];
+      if(data['errors']){
+        for(var key in data['errors']){
+          console.log(data['errors'][key]['message']);
+          this.errors.push(data['errors'][key]['message']);
+          
+        }
+      }
+      else{
+        console.log('this is da data', data)
+        this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
+        this.getBreakfast()
+        this._router.navigate([`/meal/${this.schedule._id}`])
+        console.log('this is da data', data)
+      }
     })
   }
 

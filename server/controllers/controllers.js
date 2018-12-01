@@ -41,60 +41,83 @@ module.exports = {
         })
     },
     addBreakfast: (req, res)=>{
-        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
-        {
-            "$push": {
-                "schedule.$.Breakfast": req.body,
-        }
-    },
-        
-    (err, data)=>{
-        if(err){
-            console.log("ERROROROROR", err);
-            res.json(err)
-        } else {
-            console.log("DATATATAT", data)
-            res.json(data)
-        }
-    })
-
+        Breakfast.create(req.body, (err, breakfast)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }
+            else{
+                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
+                {
+                    "$push": {
+                        "schedule.$.Breakfast": req.body,
+                    }
+                },
+                (err, data)=>{
+                    if(err){
+                        console.log("ERROROROROR", err);
+                        res.json(err)
+                    } else {
+                        console.log("DATATATAT", data)
+                        res.json(data)
+                    }
+                
+                })
+            }
+        })
     },
     addLunch: (req, res)=>{
-        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
-        {
-            "$push": {
-                "schedule.$.Lunch": req.body,
-        }
-    },
-        
-    (err, data)=>{
-        if(err){
-            console.log("ERROROROROR", err);
-            res.json(err)
-        } else {
-            console.log("DATATATAT", data)
-            res.json(data)
-        }
-    })
+        Lunch.create(req.body, (err, lunch)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }
+            else{
+                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
+                {
+                    "$push": {
+                        "schedule.$.Lunch": req.body,
+                }
+            },
+                
+            (err, data)=>{
+                if(err){
+                    console.log("ERROROROROR", err);
+                    res.json(err)
+                } else {
+                    console.log("DATATATAT", data)
+                    res.json(data)
+                }
+            })
+            }
+        })
 
     },
     addDinner: (req, res)=>{
-        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
-        {
-            "$push": {
-                "schedule.$.Dinner": req.body,
-        }
-    },
-        
-    (err, data)=>{
-        if(err){
-            console.log("ERROROROROR", err);
-            res.json(err)
-        } else {
-            console.log("DATATATAT", data)
-            res.json(data)
-        }
-    })
+        Dinner.create(req.body, (err, dinner)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }
+            else{
+                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.s_id}, 
+                {
+                    "$push": {
+                        "schedule.$.Dinner": req.body,
+                }
+            },
+                
+            (err, data)=>{
+                if(err){
+                    console.log("ERROROROROR", err);
+                    res.json(err)
+                } else {
+                    console.log("DATATATAT", data)
+                    res.json(data)
+                }
+            })
+            }
+        })
 
     },
     singleFood: (req, res)=>{
@@ -199,24 +222,33 @@ module.exports = {
         console.log(req.params.id);
         console.log("session id: ", req.session.first_name)
         console.log("BODY", req.body);
-        
-        User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.body._id}, 
-            {
-                "$set": {
-                    "schedule.$.Breakfast_time": req.body.Breakfast_time,
-                    "schedule.$.Lunch_time": req.body.Lunch_time,
-                    "schedule.$.Dinner_time": req.body.Dinner_time,
-            }
-        },
-            
-        (err, data)=>{
+        Schedule.create(req.body, (err, schedule)=>{
             if(err){
-                console.log("ERROROROROR", err);
-                res.json(err)
-            } else {
-                console.log("DATATATAT", data)
-                res.json(data)
+                console.log(err);
+                res.json(err);
             }
+            else{
+                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.body._id}, 
+                    {
+                        "$set": {
+                            "schedule.$.Breakfast_time": req.body.Breakfast_time,
+                            "schedule.$.Lunch_time": req.body.Lunch_time,
+                            "schedule.$.Dinner_time": req.body.Dinner_time,
+                    }
+                }),
+                    
+                (err, data)=>{
+                    if(err){
+                        console.log("ERROROROROR", err);
+                        res.json(err)
+                    } else {
+                        console.log("DATATATAT", data)
+                        res.json(data)
+                    }
+                }
+            }
+
+        
 
 
 
@@ -239,15 +271,15 @@ module.exports = {
         //         // })
         //         Schedule.
         //     }   
-        })
-    }, 
+    })
+}, 
     login: (req, res)=>{
-        console.log(" req.body: ", req.body);
         User.findOne({username:req.body.username}, (err, user) => {
-            console.log("user", user)
+            if(user==null){
+                err = "Username or Password is invalid"
+                res.json(err);
+            }
             if (user) {
-                console.log("we in the if statement boys")
-                console.log("1: ", req.body.password, "2: ", user.password)
                 bcrypt.compare(req.body.password, user.password).then( result => {
                     console.log(result)
                     if(result){
@@ -259,18 +291,18 @@ module.exports = {
                         res.json(user, req.session.user_id, req.session.first_name)
                     } 
                     else{
-                        console.log("err")
-                        res.redirect('/')
-                    }    
+                        console.log("2, Username or Password is invalid");
+                        res.json("Username or Password is invalid");
+                    }   
                 })
                 .catch( error => {
                      console.log("something went wrong")
                 })
             }
-            else {
-            
-                res.redirect('/');
-            }
+            // else {
+                //console.log("Username or Password is invalid")
+            //     res.json("Username or Password is invalid");
+            // }
         }) 
     },
     register: (req, res)=>{

@@ -13,7 +13,9 @@ export class LogRegComponent implements OnInit {
   constructor(private _httpService: HttpService,private _http: HttpClient, private _router: Router) { }
   s: any={};
   showNav = true;
+  errors=[];
   ngOnInit() {
+    console.log(this.showNav);
     $( document ).ready(function() {
       console.log( "ready!" );
     this.showNav = true
@@ -38,11 +40,21 @@ export class LogRegComponent implements OnInit {
 });
   }
   login(){
+    this.errors = [];
     this._httpService.login(this.s).subscribe(data=>{
-      console.log('hi')
+      console.log(data)
+      if(data == "Username or Password is invalid"){
+          console.log(data);
+          this.errors.push(data);
+          
+        }
+        else{
+          console.log('hi')
       console.log("this is the data", data);
       this.s = data;
       this._router.navigate(['/dashboard'])
+        }
+      
 
     });
     
@@ -50,9 +62,19 @@ export class LogRegComponent implements OnInit {
   register(){
     console.log(this.s)
     this._httpService.register(this.s).subscribe(data=>{
-      console.log(data);
-      this.s = data;
-      this._router.navigate([`/dashboard`])
+      this.errors = [];
+      if(data['errors']){
+        for(var key in data['errors']){
+          console.log(data['errors'][key]['message']);
+          this.errors.push(data['errors'][key]['message']);
+          
+        }
+      }
+      else{
+        console.log(data);
+        this.s = data;
+        this._router.navigate([`/dashboard`])
+      }
     })
   }
   

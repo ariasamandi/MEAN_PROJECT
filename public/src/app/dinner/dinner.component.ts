@@ -13,6 +13,7 @@ export class DinnerComponent implements OnInit {
   newFood: any={};
   schedule: any;
   Dinner: any;
+  errors=[];
   ngOnInit() {
     this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
     console.log("before", this.Dinner)
@@ -36,11 +37,21 @@ export class DinnerComponent implements OnInit {
   addFood(){
     console.log("Start of add food function")
     this._http.createDinner(this.newFood, this.schedule['_id']).subscribe(data=>{
+      this.errors = [];
+      if(data['errors']){
+        for(var key in data['errors']){
+          console.log(data['errors'][key]['message']);
+          this.errors.push(data['errors'][key]['message']);
+          
+        }
+      }
+      else{
       console.log('this is da data', data)
       this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
       this.getDinner()
       this._router.navigate([`/dinner/${this.schedule._id}`])
       console.log('this is da data', data)
+      }
     })
   }
 }

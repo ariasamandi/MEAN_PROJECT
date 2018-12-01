@@ -11,6 +11,7 @@ export class SettingsComponent implements OnInit {
   erros = [];
   editing: any;
   schedule: any;
+  errors = [];
   constructor(private _httpService: HttpService,  private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,8 +27,21 @@ export class SettingsComponent implements OnInit {
   editSchedule(schedule){
     console.log(schedule, "edited");
     this._httpService.es(schedule).subscribe(data=>{
+      this.errors = [];
+      if(data['errors']){
+        console.log(data['errors'])
+        for(var key in data['errors']){
+          if(key == 'Breakfast_time' || key == 'Lunch_time' || key == 'Dinner_time'){
+            console.log(data['errors'][key]['message']);
+            this.errors.push(data['errors'][key]['message']);
+          }
+          
+        }
+      }
+      else{
       console.log(data);
       this._router.navigate(['/dashboard'])
+      }
     })
   }
   getSchedule(schedule){

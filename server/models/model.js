@@ -36,7 +36,7 @@ const ScheduleSchema = mongoose.Schema({
 
 });
 const UserSchema = mongoose.Schema({
-    first_name: {type: String, required: [true, "enter name"]},
+    first_name: {type: String, required: [true, "must enter first name"]},
     last_name: {type: String, required: [true, "must enter last name"]},
     username: {type: String, required: [true, "must enter username"]},
     password: {type: String, required: [true, "must enter password"]},
