@@ -12,11 +12,17 @@ export class SettingsComponent implements OnInit {
   editing: any;
   schedule: any;
   errors = [];
+  logged: any;
   constructor(private _httpService: HttpService,  private _router: Router, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._httpService.sessionUser().subscribe(d=>{
-      console.log("session user: ", d);
+    this._httpService.sessionUser().subscribe(hi=>{
+      if(!hi){
+        this._router.navigate([`/`])
+      }
+      else{
+        this.logged = true;
+      }
     })
       this._httpService.sessionUser().subscribe(data=>{
       console.log("single schedule data: ", data['schedule'][0]['Breakfast_time']);
@@ -29,7 +35,7 @@ export class SettingsComponent implements OnInit {
     this._httpService.es(schedule).subscribe(data=>{
       this.errors = [];
       if(data['errors']){
-        console.log(data['errors'])
+        console.log("errors", data['errors'])
         for(var key in data['errors']){
           if(key == 'Breakfast_time' || key == 'Lunch_time' || key == 'Dinner_time'){
             console.log(data['errors'][key]['message']);
@@ -39,16 +45,9 @@ export class SettingsComponent implements OnInit {
         }
       }
       else{
-      console.log(data);
+      console.log("no errors", data);
       this._router.navigate(['/dashboard'])
       }
-    })
-  }
-  getSchedule(schedule){
-    this._httpService.singleSchedule(schedule._id).subscribe(single=>{
-      console.log("this is da single", single);
-      this.schedule = single;
-      console.log("todays my birthdsy", this.schedule)
     })
   }
 

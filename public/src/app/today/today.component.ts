@@ -14,7 +14,16 @@ export class TodayComponent implements OnInit {
   Lunch: any;
   Dinner: any;
   schedule: any;
+  logged: any;
   ngOnInit() {
+    this._http.sessionUser().subscribe(hi=>{
+      if(!hi){
+        this._router.navigate([`/`])
+      }
+      else{
+        this.logged = true;
+      }
+    })
     this.getBreakfast();
     this.getLunch();
     this.getDinner();

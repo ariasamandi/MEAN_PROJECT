@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpService} from './../http.service';
 import { Chart } from 'chart.js';
 import { NumberFormatStyle } from '@angular/common';
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-calculate',
   templateUrl: './calculate.component.html',
@@ -9,15 +10,24 @@ import { NumberFormatStyle } from '@angular/common';
 })
 export class CalculateComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService, private _router: Router) { }
   Breakfast: any;
   calories: any;
   protein: any;
   carbs: any;
   fats: any;
   chart: any;
+  logged: any;
 
   ngOnInit() {
+    this._http.sessionUser().subscribe(hi=>{
+      if(!hi){
+        this._router.navigate([`/`])
+      }
+      else{
+        this.logged = true;
+      }
+    })
     this.sum();
     this.setchart();
     

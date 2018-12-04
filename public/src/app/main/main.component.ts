@@ -15,10 +15,14 @@ export class MainComponent implements OnInit {
   hasSchedule: any;
   schedule: any;
   user: any;
+  logged: any;
   ngOnInit(){
     this._httpService.sessionUser().subscribe(hi=>{
       if(!hi){
         this._router.navigate([`/`])
+      }
+      else{
+        this.logged = true;
       }
     })
     console.log(this.hasSchedule)

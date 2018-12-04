@@ -1,3 +1,4 @@
+<div *ngIf="logged == true">
 <div class="p-3 mb-2 bg-secondary text-white">
     <style>
         #wrapper{
@@ -9,10 +10,11 @@
 <h1>Edit Schedule</h1>
 <p class="alert alert-danger" *ngFor="let e of errors">{{e}}</p>
 <form (submit)="editSchedule(schedule)">
-        <h3>Breakfast time</h3><input type="time" name="schedule.Breakfast_time" [(ngModel)]="schedule.Breakfast_time">
-        <h3>Lunch Time</h3><input type="time" name="schedule.Lunch_time" [(ngModel)]="schedule.Lunch_time">
-        <h3>Dinner Time</h3><input type="time" name="schedule.Dinner_time" [(ngModel)]="schedule.Dinner_time">
-        &nbsp;<input type="submit" class="btn btn-info" value="Edit Schedule">
+        <h3>Breakfast time</h3><input class="form-control" type="time" name="schedule.Breakfast_time" [(ngModel)]="schedule.Breakfast_time">
+        <h3>Lunch Time</h3><input class="form-control" type="time" name="schedule.Lunch_time" [(ngModel)]="schedule.Lunch_time">
+        <h3>Dinner Time</h3><input class="form-control" type="time" name="schedule.Dinner_time" [(ngModel)]="schedule.Dinner_time">
+       &nbsp;<input style="margin-top:30px" type= "submit" class="btn btn-info" value="Edit Schedule">
       </form>
   </div>
       </div>
+    </div>

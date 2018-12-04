@@ -1,6 +1,17 @@
+<style>
+    #wrapper{
+      background-color: #6c757d;
+      height:592px;
+    }
+    h3{
+      color: white;
+    }
+  </style>
+  <div id="wrapper">
 <form (submit)="addSchedule()">
-    <h3>Breakfast time</h3><input type="time" name="newSchedule.Breakfast_time" [(ngModel)]="newSchedule.Breakfast_time">
-    <h3>Lunch Time</h3><input type="time" name="newSchedule.Lunch_time" [(ngModel)]="newSchedule.Lunch_time">
-    <h3>Dinner Time</h3><input type="time" name="newSchedule.Dinner_time" [(ngModel)]="newSchedule.Dinner_time">
-    <input type="submit" value="Submit">
+    <h3>Breakfast time</h3><input class="form-control" type="time" name="newSchedule.Breakfast_time" [(ngModel)]="newSchedule.Breakfast_time">
+    <h3>Lunch Time</h3><input class="form-control" type="time" name="newSchedule.Lunch_time" [(ngModel)]="newSchedule.Lunch_time">
+    <h3>Dinner Time</h3><input class="form-control" type="time" name="newSchedule.Dinner_time" [(ngModel)]="newSchedule.Dinner_time">
+    &nbsp;<input style="margin-top:30px" type= "submit" class="btn btn-info" value="Submit">
   </form>
+</div>

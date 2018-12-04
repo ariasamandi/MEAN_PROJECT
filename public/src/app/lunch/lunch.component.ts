@@ -14,7 +14,16 @@ export class LunchComponent implements OnInit {
   schedule: any;
   Lunch: any;
   errors=[];
+  logged: any;
   ngOnInit() {
+    this._http.sessionUser().subscribe(hi=>{
+      if(!hi){
+        this._router.navigate([`/`])
+      }
+      else{
+        this.logged = true;
+      }
+    })
     this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
     console.log("before", this.Lunch)
     this.getLunch();

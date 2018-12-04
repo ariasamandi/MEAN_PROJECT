@@ -222,19 +222,22 @@ module.exports = {
         console.log(req.params.id);
         console.log("session id: ", req.session.first_name)
         console.log("BODY", req.body);
-        Schedule.create(req.body, (err, schedule)=>{
+        console.log("breakfast tuime", req.body.Breakfast_time);
+        Schedule.create({Breakfast_time: req.body.Breakfast_time, Lunch_time: req.body.Lunch_time, Dinner_time: req.body.Dinner_time}, (err, schedule)=>{
             if(err){
                 console.log(err);
                 res.json(err);
             }
             else{
+                console.log("created schedule", schedule);
                 User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.body._id}, 
-                    {
+                    { 
                         "$set": {
                             "schedule.$.Breakfast_time": req.body.Breakfast_time,
                             "schedule.$.Lunch_time": req.body.Lunch_time,
                             "schedule.$.Dinner_time": req.body.Dinner_time,
                     }
+                   
                 }),
                     
                 (err, data)=>{
@@ -247,30 +250,6 @@ module.exports = {
                     }
                 }
             }
-
-        
-
-
-
-        //     console.log("USER ERR", err)
-        //     console.log("USER DATA", data)
-        //     if(err){
-        //         res.json(err);
-        //     }
-        //     else{
-        //         // Schedule.updateOne({_id: req.params.id}, {$push: {Breakfast_time: req.body.Breakfast_time, Lunch_time: req.body.Lunch_time, Dinner_time: req.body.Dinner_time}}, (err, data)=>{
-        //         //     if(err){
-        //         //         console.log(err);
-        //         //         res.json(err);
-        //         //     }
-        //         //     else{
-        //         //         console.log(data);
-        //         //         res.json(data);
-        //         //     }
-                
-        //         // })
-        //         Schedule.
-        //     }   
     })
 }, 
     login: (req, res)=>{
@@ -299,10 +278,6 @@ module.exports = {
                      console.log("something went wrong")
                 })
             }
-            // else {
-                //console.log("Username or Password is invalid")
-            //     res.json("Username or Password is invalid");
-            // }
         }) 
     },
     register: (req, res)=>{

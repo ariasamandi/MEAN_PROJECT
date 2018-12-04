@@ -15,6 +15,11 @@ export class DinnerComponent implements OnInit {
   Dinner: any;
   errors=[];
   ngOnInit() {
+    this._http.sessionUser().subscribe(hi=>{
+      if(!hi){
+        this._router.navigate([`/`])
+      }
+    })
     this.newFood = {name: "", calories: "", protein: "", fat: "", carbs: ""};
     console.log("before", this.Dinner)
     this.getDinner();
