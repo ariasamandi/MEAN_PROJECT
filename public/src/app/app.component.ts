@@ -22,5 +22,8 @@ export class AppComponent {
       this.hasSchedule = false;
     }
 })
+this._httpService.sessionUser().subscribe(data=>{
+  console.log(data);
+})
   }
 }

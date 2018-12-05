@@ -230,9 +230,9 @@ module.exports = {
             }
             else{
                 console.log("created schedule", schedule);
-                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.body._id}, 
+                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.params.id}, 
                     { 
-                        "$set": {
+                        "$push": {
                             "schedule.$.Breakfast_time": req.body.Breakfast_time,
                             "schedule.$.Lunch_time": req.body.Lunch_time,
                             "schedule.$.Dinner_time": req.body.Dinner_time,
