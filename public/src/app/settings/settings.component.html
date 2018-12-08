@@ -10,9 +10,9 @@
 <h1>Edit Schedule</h1>
 <p class="alert alert-danger" *ngFor="let e of errors">{{e}}</p>
 <form (submit)="editSchedule(schedule)">
-        <h3>Breakfast time</h3><input class="form-control" type="time" name="schedule.Breakfast_time" [(ngModel)]="schedule.Breakfast_time">
-        <h3>Lunch Time</h3><input class="form-control" type="time" name="schedule.Lunch_time" [(ngModel)]="schedule.Lunch_time">
-        <h3>Dinner Time</h3><input class="form-control" type="time" name="schedule.Dinner_time" [(ngModel)]="schedule.Dinner_time">
+        <h3>Breakfast time</h3><input  class="form-control" type="time" name="schedule.Breakfast_time" [(ngModel)]="schedule.Breakfast_time" required>
+        <h3>Lunch Time</h3><input  min="0:00" max="23:99" class="form-control" type="time" name="schedule.Lunch_time" [(ngModel)]="schedule.Lunch_time" required>
+        <h3>Dinner Time</h3><input  class="form-control" type="time" name="schedule.Dinner_time" [(ngModel)]="schedule.Dinner_time" required>
        &nbsp;<input style="margin-top:30px" type= "submit" class="btn btn-info" value="Edit Schedule">
       </form>
   </div>

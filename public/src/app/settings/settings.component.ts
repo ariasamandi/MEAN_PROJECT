@@ -37,12 +37,9 @@ export class SettingsComponent implements OnInit {
       if(data['errors']){
         console.log("errors", data['errors'])
         for(var key in data['errors']){
-          if(key == 'Breakfast_time' || key == 'Lunch_time' || key == 'Dinner_time'){
             console.log(data['errors'][key]['message']);
             this.errors.push(data['errors'][key]['message']);
           }
-          
-        }
       }
       else{
       console.log("no errors", data);
