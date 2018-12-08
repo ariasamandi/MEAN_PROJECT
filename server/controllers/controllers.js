@@ -168,29 +168,125 @@ module.exports = {
                 res.json(err);
             }
             else{
-                Schedule.create(req.body, (err, schedule)=>{
+                User.update({_id: user._id}, {$push: {schedule: req.body}}, (err, data)=>{
                     if(err){
-                        res.json(err);
+                        res.json(err)
                     }
                     else{
-                        console.log("user create: ", schedule);
-                        User.update({_id: user._id}, {$push: {schedule: schedule}}, (err, data)=>{
-                            if(err){
-                                res.json(err)
-                            }
-                            else{
-                                console.log("SUCCC!")
-                                console.log("Data", data)
-                                res.json(data);
-                            }
-                    })
+                        console.log("SUCCC!")
+                        console.log("data", data)
+                        res.json(data); 
                     }
-                })
-               
+            })
         }
     })
     
     },
+        // Schedule.create(req.body, (err, schedule)=>{
+        //     if(err){
+        //         console.log(err);
+        //         res.json(err);
+        //     }
+        //     else{
+        //         console.log("schedule", schedule);
+        //         console.log("schedule id ", schedule._id)
+        //         User.findOneAndUpdate({first_name: req.session.user_id, "schedule._id" : schedule._id}, 
+        //     {
+        //         "$set": {
+        //             "schedule.$._id": schedule._id,
+        //             "schedule.$.Breakfast_time": schedule.Breakfast_time,
+        //             "schedule.$.Lunch_time": schedule.Lunch_time,
+        //             "schedule.$.Dinner_time": schedule.Dinner_time,
+        //     }
+        // },
+            
+        // (err, data)=>{
+        //     if(err){
+        //         console.log("ERROROROROR", err);
+        //         res.json(err)
+        //     } else {
+        //         console.log("DATATATAT", data)
+        //         res.json(schedule)
+        //     }
+        // })
+        //         // console.log("user session", req.session.first_name)
+        //         // User.findOne({first_name: req.session.first_name}, (err, user)=>{
+        //         //     console.log("hi", user)
+        //         //     if(err){
+        //         //         res.json(err);
+        //         //     }
+        //         //     else{
+        //         //         User.update({_id: user._id}, {$push: {schedule: schedule}}, (err, data)=>{
+        //         //             if(err){
+        //         //                 res.json(err)
+        //         //             }
+        //         //             else{
+        //         //                 console.log("SUCCC!");
+        //         //                 console.log(data)
+        //         //                 res.json(data);
+        //         //             }
+        //         //     })
+        //         // }
+        //         // })
+        //     }
+        // })
+       
+        // console.log("we in motion")
+        // console.log(req.session);
+        // console.log(req.body);
+        // console.log(req.params.id);
+        // console.log("session id: ", req.session.first_name)
+        // console.log("BODY", req.body);
+        
+        // User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : req.body._id}, 
+        //     {
+        //         "$set": {
+        //             "schedule.$.Breakfast_time": req.body.Breakfast_time,
+        //             "schedule.$.Lunch_time": req.body.Lunch_time,
+        //             "schedule.$.Dinner_time": req.body.Dinner_time,
+        //     }
+        // },
+            
+        // (err, data)=>{
+        //     if(err){
+        //         console.log("ERROROROROR", err);
+        //         res.json(err)
+        //     } else {
+        //         console.log("DATATATAT", data)
+        //         res.json(data)
+        //     }
+    //     console.log("user session", req.session.first_name)
+    //     User.findOne({first_name: req.session.first_name}, (err, user)=>{
+    //         console.log("hi", user)
+    //         if(err){
+    //             res.json(err);
+    //         }
+    //         else{
+    //             Schedule.create(req.body, (err, schedule)=>{
+    //                 if(err){
+    //                     res.json(err);
+    //                 }
+    //                 else{
+    //                     console.log("user create: ", schedule);
+    //                     User.update({_id: user._id}, {$push: {schedule: schedule}}, (err, data)=>{
+    //                         if(err){
+    //                             res.json(err)
+    //                         }
+    //                         else{
+    //                             console.log("SUCCC!")
+    //                             console.log("Data", data)
+    //                             res.json(data);
+    //                         }
+    //                 })
+    //                 }
+    //             })
+               
+    //     }
+    // })
+        // })
+
+ 
+    // },
     allSchedule: (req, res)=>{
         Schedule.find({}, (err, data)=>{
             if(err){

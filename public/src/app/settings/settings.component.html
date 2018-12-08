@@ -9,7 +9,7 @@
   <div id=wrapper>
 <h1>Edit Schedule</h1>
 <p class="alert alert-danger" *ngFor="let e of errors">{{e}}</p>
-<form (submit)="editSchedule(schedule)">
+<form (submit)="editSchedule(schedule)" ngNativeValidate>
         <h3>Breakfast time</h3><input  class="form-control" type="time" name="schedule.Breakfast_time" [(ngModel)]="schedule.Breakfast_time" required>
         <h3>Lunch Time</h3><input  min="0:00" max="23:99" class="form-control" type="time" name="schedule.Lunch_time" [(ngModel)]="schedule.Lunch_time" required>
         <h3>Dinner Time</h3><input  class="form-control" type="time" name="schedule.Dinner_time" [(ngModel)]="schedule.Dinner_time" required>
