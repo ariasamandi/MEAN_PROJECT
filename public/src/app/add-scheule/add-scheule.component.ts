@@ -11,13 +11,13 @@ export class AddScheuleComponent implements OnInit {
   constructor(private _httpService: HttpService, private _router: Router) { }
 
   ngOnInit() {
-    this.newSchedule = {breakfast_time: "", lunch_time: "", dinner_time: ""}
+    this.newSchedule = {Breakfast_time: "", Lunch_time: "", Dinner_time: ""}
   }
   addSchedule(){
     console.log(this.newSchedule, "i am here from ts");
     this._httpService.addSchedule(this.newSchedule).subscribe(data=>{
       console.log(data);
-      this.newSchedule = {breakfast_time: "", lunch_time: "", dinner_time: ""}
+      this.newSchedule = {Breakfast_time: "", Lunch_time: "", Dinner_time: ""}
           this._router.navigate(['/dashboard'])
     })
   }

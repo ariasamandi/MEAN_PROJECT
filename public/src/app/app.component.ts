@@ -24,6 +24,7 @@ export class AppComponent {
 })
 this._httpService.sessionUser().subscribe(data=>{
   console.log(data);
+  
 })
   }
 }
