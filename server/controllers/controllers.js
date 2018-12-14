@@ -173,12 +173,10 @@ module.exports = {
             }
             else{
                 console.log("data", data);
-                User.findOneAndUpdate({first_name: req.session.first_name, "schedule._id" : data._id}, 
+                User.findOneAndUpdate({first_name: req.session.first_name}, 
                 {
-                    "$set": {
-                        "schedule.$.Breakfast_time": req.body.Breakfast_time,
-                        "schedule.$.Lunch_time": req.body.Lunch_time,
-                        "schedule.$.Dinner_time": req.body.Dinner_time,
+                    "$push": {
+                        "schedule" : data
                 }
             },
                 
