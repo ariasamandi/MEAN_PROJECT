@@ -173,7 +173,7 @@ module.exports = {
             }
             else{
                 console.log("data", data);
-                User.findOneAndUpdate({first_name: req.session.first_name}, 
+                User.findOneAndUpdate({_id: req.session.user_id}, 
                 {
                     "$push": {
                         "schedule" : data
