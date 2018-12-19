@@ -55,4 +55,13 @@ export class HttpService {
    register2(){
      return this._http.get('api/register');
    }
+   deleteBreakfast(data){
+     return this._http.delete(`api/breakfast/delete/${data._id}`)
+   }
+   deleteLunch(data){
+    return this._http.delete(`api/lunch/delete/${data._id}`)
+  }
+  deleteDinner(data){
+    return this._http.delete(`api/dinner/delete/${data._id}`)
+  }
 }

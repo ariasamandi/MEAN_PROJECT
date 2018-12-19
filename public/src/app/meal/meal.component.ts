@@ -44,6 +44,12 @@ export class MealComponent implements OnInit {
       // console.log("this is brakwfast", this.Breakfast.schedule[0].Breakfast)
     })
   }
+  delete(b){
+    this._http.deleteBreakfast(b).subscribe(data=>{
+      console.log(data);
+      this.getBreakfast();
+    })
+  }
   addFood(){
     console.log("Start of add food function")
     this._http.createBreakfast(this.newFood, this.schedule['_id']).subscribe(data=>{

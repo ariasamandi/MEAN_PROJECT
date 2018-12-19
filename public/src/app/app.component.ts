@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'To Your Workout Schedule';
   hasSchedule = true;
   schedule: any;
+  user: any;
   ngOnInit(){
    this._httpService.allSchedule().subscribe(data=>{
     
@@ -24,7 +25,7 @@ export class AppComponent {
 })
 this._httpService.sessionUser().subscribe(data=>{
   console.log(data);
-  
+  this.user = data;
 })
   }
 }

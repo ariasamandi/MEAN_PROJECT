@@ -510,5 +510,57 @@ module.exports = {
     logout: (req, res)=>{
         req.session.destroy();
         res.redirect('/')
-    }
+    },
+    deleteBreakfast: (req, res)=>{
+        User.findOne({_id: req.session.user_id}, (err, user)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }
+            else{
+                user.schedule[0].Breakfast.id(req.params.id).remove();
+                user.save(function (err) {
+                    if (err) return handleError(err);
+                    console.log('the subdocs were removed');
+                    res.json(user.schedule[0]);
+                  });
+            }
+        })
+
+    },
+    deleteLunch: (req, res)=>{
+        User.findOne({_id: req.session.user_id}, (err, user)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }
+            else{
+                console.log(user.schedule[0].Lunch);
+                console.log(req.params.id);
+                user.schedule[0].Lunch.id(req.params.id).remove();
+                user.save(function (err) {
+                    if (err) return handleError(err);
+                    console.log('the subdocs were removed');
+                    res.json(user.schedule[0]);
+                  });
+            }
+        })
+    },
+        deleteDinner: (req, res)=>{
+        User.findOne({_id: req.session.user_id}, (err, user)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }
+            else{
+                user.schedule[0].Dinner.id(req.params.id).remove();
+                user.save(function (err) {
+                    if (err) return handleError(err);
+                    console.log('the subdocs were removed');
+                    res.json(user.schedule[0]);
+                  });
+            }
+        })
+
+    },
 }

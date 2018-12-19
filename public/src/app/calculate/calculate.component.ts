@@ -29,7 +29,7 @@ export class CalculateComponent implements OnInit {
       }
     })
     this.sum();
-    this.setchart();
+    // this.setchart();
     
   }
   sum(){
@@ -69,10 +69,9 @@ export class CalculateComponent implements OnInit {
           this.protein += all['schedule'][0]['Dinner'][i].protein;
           this.carbs += all['schedule'][0]['Dinner'][i].carbs;
           this.fats += all['schedule'][0]['Dinner'][i].fat;
-        }
-      this.setchart();
-            
+        }   
           }
+          this.setchart();
           var p = this.protein;
           console.log(this.fats, "dinner fats")
     })
@@ -88,11 +87,11 @@ export class CalculateComponent implements OnInit {
   setchart(){
     
     console.log(this.protein, "chart protien")
-    var protein = 10;
+    var protein = this.protein;
 
     
-    var fats = 20;
-    var carbs = 30;
+    var fats = this.fats;
+    var carbs = this.carbs;
     console.log("protein", protein, this.protein, "fats", fats, this.fats, "carbs", carbs, this.carbs);
     this.chart = new Chart("pie", {
       type:'pie', //bar, pie, horizontal, line, doughnut, radar , polar
@@ -101,9 +100,9 @@ export class CalculateComponent implements OnInit {
                 datasets: [{
                     label: 'population',
                     data: [
+                        carbs,
                         protein,
                         fats,
-                        carbs,
                     ],
                      backgroundColor: 
                     [

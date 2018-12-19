@@ -18,6 +18,9 @@ module.exports = (app)=>{
     app.get('/api/users', Controller.users);
     app.get('/api/session', Controller.sessionUser);
     app.get('/logout', Controller.logout);
+    app.delete(`/api/breakfast/delete/:id`, Controller.deleteBreakfast);
+    app.delete(`/api/lunch/delete/:id`, Controller.deleteLunch);
+    app.delete(`/api/dinner/delete/:id`, Controller.deleteDinner);
     app.all('*', (req, res)=> res.sendFile(path.resolve('./public/dist/public/index.html')));
     
 }
