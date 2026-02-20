@@ -5,10 +5,7 @@ const Dinner = mongoose.model('Dinner');
 const Activity = mongoose.model('Activity');
 const Schedule = mongoose.model('Schedule');
 const User = mongoose.model('User');
-const express = require('express');
-const bcrypt =  require('bcrypt-promise');
-const session = require('express-session');
-const app = express();
+const bcrypt = require('bcryptjs');
 module.exports = {
     getBreakfast: (req, res)=>{
         Breakfast.find({}, (err, food)=>{
@@ -440,47 +437,38 @@ module.exports = {
                 res.json(err);
             }
             if (user) {
-                bcrypt.compare(req.body.password, user.password).then( result => {
-                    console.log(result)
-                    if(result){
-                        console.log("sucess.,!")
-                        req.session.user_id = user._id;
-                        req.session.first_name = user.first_name;
-                        console.log("i am session user", req.session.user_id);
-                        console.log("session", req.session)
-                        res.json(user, req.session.user_id, req.session.first_name)
-                    } 
-                    else{
-                        console.log("2, Username or Password is invalid");
-                        res.json("Username or Password is invalid");
-                    }   
-                })
-                .catch( error => {
-                     console.log("something went wrong")
-                })
+                const result = bcrypt.compareSync(req.body.password, user.password);
+                console.log(result)
+                if(result){
+                    console.log("sucess.,!")
+                    req.session.user_id = user._id;
+                    req.session.first_name = user.first_name;
+                    console.log("i am session user", req.session.user_id);
+                    console.log("session", req.session)
+                    res.json(user, req.session.user_id, req.session.first_name)
+                } 
+                else{
+                    console.log("2, Username or Password is invalid");
+                    res.json("Username or Password is invalid");
+                }
             }
         }) 
     },
     register: (req, res)=>{
         console.log("req.body: ", req.body);
-        bcrypt.hash(req.body.password, 10).then(hashed_password => {
-            
-            User.create({first_name: req.body.first_name,  last_name: req.body.last_name, username: req.body.username, password: hashed_password}, (err, user)=>{
-                if(err){
-                    res.json(err);
-                }
-                else{
-                   console.log(user);
-                   req.session.user_id = user._id;
-                   req.session.first_name = user.first_name;
-                   console.log("i am session user", req.session.user_id);
-                   res.json(user);
-                }
-            })
+        const hashed_password = bcrypt.hashSync(req.body.password, 10);
+        User.create({first_name: req.body.first_name,  last_name: req.body.last_name, username: req.body.username, password: hashed_password}, (err, user)=>{
+            if(err){
+                res.json(err);
+            }
+            else{
+               console.log(user);
+               req.session.user_id = user._id;
+               req.session.first_name = user.first_name;
+               console.log("i am session user", req.session.user_id);
+               res.json(user);
+            }
         })
-        .catch(error => {
-            console.log("something went wrong")
-        });
         
     },
     users: (req, res)=>{

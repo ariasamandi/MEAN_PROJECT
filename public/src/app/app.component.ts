@@ -9,6 +9,7 @@ import {HttpClient} from '@angular/common/http'
 export class AppComponent {
   constructor(private _httpService: HttpService,private _http: HttpClient){}
   title = 'To Your Workout Schedule';
+  showNav = false;
   hasSchedule = true;
   schedule: any;
   user: any;

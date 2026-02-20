@@ -1,23 +1,36 @@
 # Calorie Counter
-This is a web app that tracks calories and gives macro caluclations on how much you have eaten
+This web app tracks calories and gives macro calculations for your meals.
 
-# Running Project
+## Requirements
+- Node.js 20+ (tested on modern Node)
+- MongoDB running locally on `mongodb://127.0.0.1:27017/mean_project`
+  - Or set `MONGODB_URI` to use another connection string
+
+## Install
 ```bash
-cd {{project name}}
+npm install
+npm install --prefix public
 ```
+
+## Run in development
+Terminal 1 (API):
 ```bash
-nodemon server.js
+npm run dev
 ```
-Now we want to open a new terminal and while we run our server we want to run angular
+
+Terminal 2 (Angular app):
 ```bash
-cd {{project name}}
+npm run start --prefix public
 ```
+
+The API runs on `http://localhost:8000` and Angular dev server runs on `http://localhost:4200`.
+
+## Build frontend for Express static hosting
 ```bash
-cd public
+npm run build --prefix public
 ```
+
+After building, start the backend:
 ```bash
-ng build
-```
-```bash
-ng serve
+npm start
 ```

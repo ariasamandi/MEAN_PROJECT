@@ -1,12 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt-promise');
 const session = require('express-session');
 
 app.use(express.static(__dirname + '/public/dist/public'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -15,14 +14,6 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 600000000000 }
 }))
-
-bcrypt.hash('password_from_form', 10)
-.then(hashed_password => {
-	 
-})
-.catch(error => {
-	 
-});
 
 require('./server/config/mongoose');
 require('./server/config/routes')(app);
